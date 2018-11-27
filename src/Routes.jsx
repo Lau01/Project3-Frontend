@@ -5,6 +5,7 @@ import SearchTrip from './components/SearchTrip';
 import SearchResults from './components/SearchResults'
 import Login from './components/Login'
 import SignUp from './components/SignUp';
+import './App.css';
 
 
 

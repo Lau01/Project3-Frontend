@@ -33,7 +33,7 @@ class SearchTrip extends Component {
       // timeValue,
       // timeNum
     } = this.state
-    
+
     this.props.history.push(`/search/${origin}/${destination}`)
     event.preventDefault();
   }

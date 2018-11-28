@@ -23,12 +23,20 @@ class SignUp extends Component {
 
     // if (this.state.username && this.state.email && this.state.password) {
       axios.post('http://localhost:3000/user/signup', {
-        // username: this.state.username,
+        username: this.state.username,
         email: this.state.email,
         password: this.state.password,
       })
       .then(res => {
-        console.log('signup')
+        console.log('signup', res.data.token);
+        // set axios header
+        axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+        // store local storage
+        if( 'localStorage' in window ){
+          localStorage.setItem('token', res.data.token);
+        }
+
+        this.props.history.push(`/search`)
       })
       .catch(console.warn)
     // }

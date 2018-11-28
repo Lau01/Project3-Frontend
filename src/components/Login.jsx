@@ -21,12 +21,17 @@ class Login extends Component {
 
   handleSubmit(event) {
     axios.post('http://localhost:3000/user/login', {
-      // username: this.state.username,
+      username: this.state.username,
       email: this.state.email,
       password: this.state.password,
     })
     .then(res => {
-      console.log('log in')
+      axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+
+      if( 'localStorage' in window ){
+        localStorage.setItem('token', res.data.token);
+      }
+      this.props.history.push(`/search`)
     })
     .catch(console.warn)
 

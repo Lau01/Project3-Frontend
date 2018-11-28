@@ -22,8 +22,8 @@ class SignUp extends Component {
     console.log('submit...')
 
     // if (this.state.username && this.state.email && this.state.password) {
-      axios.post('http://localhost:3000/users', {
-        username: this.state.username,
+      axios.post('http://localhost:3000/user/signup', {
+        // username: this.state.username,
         email: this.state.email,
         password: this.state.password,
       })

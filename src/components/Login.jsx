@@ -20,8 +20,8 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    axios.post('http://localhost:3000/users/login', {
-      username: this.state.username,
+    axios.post('http://localhost:3000/user/login', {
+      // username: this.state.username,
       email: this.state.email,
       password: this.state.password,
     })

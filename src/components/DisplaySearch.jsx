@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+// import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import '../App.css';
+const moment = require("moment");
+const momentDurationFormatSetup = require("moment-duration-format");
+// typeof moment.duration.fn.format === "function";
+// // true
+// typeof moment.duration.format === "function";
+// // true
 
 // function DisplayLegs(props) {
 //   const {
@@ -145,10 +151,6 @@ function LegDetails(props) {
         )}
       </div>
     );
-
-  // } else if( legType === 5 ){
-  //   // BUS
-
   } else {
     // not handled? what to show?
     return <div>Leg type { legType } not supported yet...</div>;
@@ -200,22 +202,39 @@ class DisplayLegs extends Component {
       showStep
     } = this.state
 
+
+
+    // let transportDetails = '';
+    // console.log(this.state.walkPath.length)
+    // if (this.state.walkPath.length > 0) {
+    //   transportDetails = `${this.props.leg.transportation.number} ${this.props.leg.transportation.description}`
+    // } else {
+    //   transportDetails = '';
+    // }
+
+    // console.log(transportDetails)
+
     return (
       <div>
         <ul>
           <li>
             <span>{origin.name}</span>
-            <button className="showDetailsButton" onClick={this.handleClick}>&#9660;</button>
-            {this.state.walkPath.length > 0
-            ?
+            {walkPath.length === 0 &&
+              <button className="showDetailsButton" onClick={this.handleClick}>
+                &#9660;
+              </button>
+            }
+
+            {this.state.walkPath.length > 0 &&
             <div>
             {this.props.leg.transportation.number}  {this.props.leg.transportation.description}
             </div>
-            :
-            null
             }
-            {showStep ? <LegDetails leg={this.props.leg} walkPath={walkPath} /> : null}
-            <div>{destination.name}</div>
+
+            {showStep &&
+            <LegDetails leg={this.props.leg} walkPath={walkPath} />
+            }
+            {/* <div>{destination.name}</div> */}
           </li>
         </ul>
       </div>
@@ -223,58 +242,95 @@ class DisplayLegs extends Component {
   }
 }
 
+function TotalDuration(props) {
+  let totalDuration = 0;
+    props.legs.map(leg =>
+    totalDuration += parseInt(leg.duration)/60
+  )
+
+  if (totalDuration > 59) {
+    return moment.duration(totalDuration, "minutes").format("h [hrs], m [min]");
+  } else {
+    return `${totalDuration} mins`;
+  }
+}
+
 
 class DisplaySearch extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showTripDetails: false,
+    }
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({
+      showTripDetails: !this.state.showTripDetails
+    })
+  }
 
   render() {
     const {
       legs
     } = this.props.journey
 
-    // NOT WORKING WHEN ONLY 1 LEG.......FIX PLZ
+
+    // If there is a opal ticket category, grab the most relavant one and display
+    let opalCategory;
+    let opalPrice;
+    if (this.props.journey.fare.tickets[0]) {
+      opalCategory = `${this.props.journey.fare.tickets[0].properties.riderCategoryName}: `
+      opalPrice = `$${this.props.journey.fare.tickets[0].properties.priceTotalFare}`
+    }
+
+    // If there is only 1 leg in the journey
+    let arrivalTime;
+    if (legs.length === 1) {
+      arrivalTime = legs[0].destination.arrivalTimePlanned
+    } else {
+      arrivalTime = legs[legs.length - 1].destination.arrivalTimePlanned
+    }
+
     const startTime = legs[0].origin.departureTimePlanned
-    const arrivalTime = legs[legs.length - 1].origin.departureTimePlanned
 
     let originName;
     let destinationName;
-    // disassembled name or name depending on what is available
+    // disassembled name or name depending on what is available for Origin
     if (legs[0].origin.parent.disassembledName) {
       originName = legs[0].origin.parent.disassembledName
     } else {
       originName = legs[0].origin.name
     }
-
+    // name for destination
     if (legs[legs.length - 1].destination.parent.disassembledName) {
       destinationName = legs[legs.length - 1].destination.parent.disassembledName
     } else {
       destinationName = legs[legs.length - 1].destination.name
     }
 
-    console.log('first leg', startTime)
-    console.log('last leg', arrivalTime)
     return(
       <div>
         <hr/>
         <div>
-          <Moment format="hh:mm A">{startTime}</Moment>@{originName}
+          <Moment format="hh:mm A">{startTime}</Moment> - <Moment format="hh:mm A">{arrivalTime}</Moment>
         </div>
-        {legs.map(leg =>
+        <div>
+          {originName} to {destinationName}
+          <button className="showTrip" onClick={this.handleClick}>Show Trip</button>
+          <span className="totalDuration"><TotalDuration legs={this.props.journey.legs}/></span>
+        </div>
+        {this.state.showTripDetails &&
+        legs.map(leg =>
           <div>
-            <DisplayLegs
-              leg={leg}
-            />
+            <DisplayLegs leg={leg}/>
           </div>
-        )}
+        )
+        }
         <div>
-          <Moment format="hh:mm A">{arrivalTime}</Moment>@{destinationName}
-        </div>
-        <div>
-          {/* {this.props.journey.legs[0].fare
-          ?
-          this.props.journey.legs[0].fare.properties.riderCategoryName
-          :
-          this.props.journey.legs[0].fare.properties.priceTotalFare
-          } */}
+          {opalCategory}{opalPrice}
         </div>
       </div>
     )

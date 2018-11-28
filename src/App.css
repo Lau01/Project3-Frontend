@@ -30,6 +30,15 @@ body {
   display: inline-block;
 }
 
+.totalDuration {
+  margin: 0 10px 0 10px;
+  font-size: 0.7em;
+}
+
+.showTrip {
+  margin: 0 10px 0 10px;
+}
+
 .routeCard {
   padding: 20px;
   border-radius: 10px;

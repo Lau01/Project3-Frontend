@@ -15,7 +15,8 @@ class FavTrips extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3000/user/favtrips`)
+    // axios.get(`http://localhost:3000/user/favtrips`)
+    axios.get(`https://plan-trip.herokuapp.com/user/favtrips`)
     .then(res => {
       this.setState({
         favTrips: res.data

@@ -32,7 +32,8 @@ class SearchResults extends Component {
     } = this.props.match.params
 
     if(window.localStorage.getItem('token')){
-      axios.post(`http://localhost:3000/user/favtrip/${origin}/${destination}`,
+      // axios.post(`http://localhost:3000/user/favtrip/${origin}/${destination}`,
+      axios.post(`https://plan-trip.herokuapp.com/user/favtrip/${origin}/${destination}`,
         {
           favTrip: {
             origin: origin,
@@ -66,11 +67,13 @@ class SearchResults extends Component {
 
       /////GET ORIGIN
       function originRequest() {
-        return axios.get(`http://localhost:3000/stop/${origin}`)
+        // return axios.get(`http://localhost:3000/stop/${origin}`)
+        return axios.get(`https://plan-trip.herokuapp.com/stop/${origin}`)
       }
       ///////GET DESTINATION
       function destinationRequest() {
-        return axios.get(`http://localhost:3000/stop/${destination}`)
+        // return axios.get(`http://localhost:3000/stop/${destination}`)
+        return axios.get(`https://plan-trip.herokuapp.com/stop/${destination}`)
       }
 
       // make both requests for origin and destination to stop finder API
@@ -101,7 +104,7 @@ class SearchResults extends Component {
             originId,
             destinationId
           } = this.state
-
+          // return axios.get(`http://localhost:3000/planner/${originId}/${destinationId}`)
           return axios.get(`http://localhost:3000/planner/${originId}/${destinationId}`)
         }))
         .then((res) => {
@@ -125,12 +128,14 @@ class SearchResults extends Component {
 
     /////GET ORIGIN function
     function originRequest() {
-      return axios.get(`http://localhost:3000/stop/${origin}`)
+      // return axios.get(`http://localhost:3000/stop/${origin}`)
+      return axios.get(`https://plan-trip.herokuapp.com/stop/${origin}`)
 
     }
     ///////GET DESTINATION function
     function destinationRequest() {
-      return axios.get(`http://localhost:3000/stop/${destination}`)
+      // return axios.get(`http://localhost:3000/stop/${destination}`)
+      return axios.get(`https://plan-trip.herokuapp.com/stop/${destination}`)
     }
 
     // make both requests for origin and destination to stop finder API
@@ -163,7 +168,8 @@ class SearchResults extends Component {
         destinationId
       } = this.state
     // GET request for trip planner
-      return axios.get(`http://localhost:3000/planner/${originId}/${destinationId}`)
+    // return axios.get(`http://localhost:3000/planner/${originId}/${destinationId}`)
+      return axios.get(`https://plan-trip.herokuapp.com/planner/${originId}/${destinationId}`)
     }))
     .then((res) => {
       this.setState({

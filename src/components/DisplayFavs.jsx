@@ -35,7 +35,8 @@ class DisplayFavs extends Component {
   }
 
   onDeleteFavClick() {
-    axios.post('http://localhost:3000/user/deltrips', {
+    // axios.post('http://localhost:3000/user/deltrips', {
+    axios.post('https://plan-trip.herokuapp.com/user/deltrips', {
       origin: this.state.origin,
       destination: this.state.destination
     })

@@ -20,7 +20,8 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    axios.post('http://localhost:3000/user/login', {
+    // axios.post('http://localhost:3000/user/login', {
+    axios.post('https://plan-trip.herokuapp.com/user/login', {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,

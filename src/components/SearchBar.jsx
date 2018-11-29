@@ -57,7 +57,7 @@ class SearchBar extends Component {
     return(
       <div className="searchBarContainer">
         <h2>Plan your trip</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form className="searchBar" onSubmit={this.handleSubmit}>
           <label>
             Origin:
             <input

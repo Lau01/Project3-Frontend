@@ -8,6 +8,7 @@ class NavBar extends Component {
 
   constructor() {
     super();
+
     this.handleLogOut = this.handleLogOut.bind(this);
   }
 
@@ -26,7 +27,9 @@ class NavBar extends Component {
     return(
       <div>
         <div className="navContainer">
-          <div className="nav searchNav"><Link to="/search">🚉 Search Trip</Link></div>
+          <div className="nav searchNav">
+            <span className="trainEmote">🚉</span><Link to="/search">Search Trip</Link>
+          </div>
           <div className="navBar">
             <span className="nav userNav">
               <Link to="/search/favtrips">Fav Trips</Link>

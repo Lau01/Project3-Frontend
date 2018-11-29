@@ -16,16 +16,13 @@ class TripMap extends Component {
        journeys,
        journeyNumber
      } = this.props
-     // console.log('from tripMap',this.props.journeyNumber)
-     // console.log(this.props.journeys);
+
      let displayJourneyArray = journeys[journeyNumber].legs
-     // console.log('displayJourneyArray', displayJourneyArray)
-     // const polylineCoords = convertLatLng(coordsArray);
 
      const GoogleTripMap = withScriptjs(withGoogleMap(props => (
       <GoogleMap
         defaultCenter = { { lat: -33.89773, lng: 151.11521 } }
-        defaultZoom = { 13 }
+        defaultZoom = { 12 }
       >
         {this.props.journeys.map(journey =>
             journey.legs.map(leg =>

@@ -11,11 +11,26 @@ class FavTrips extends Component {
     }
 
     this.handleClick = this.handleClick.bind(this);
+    this.getRequest = this.getRequest.bind(this);
+  }
 
+  getRequest() {
+    axios.get(`https://plan-trip.herokuapp.com/user/favtrips`)
+    .then(res => {
+      console.log(res.data)
+      this.setState({
+        favTrips: res.data
+      })
+      console.log(this.state.favTrips)
+    })
+    .catch(err => {
+      console.warn(err);
+    });
   }
 
   componentDidMount() {
     // axios.get(`http://localhost:3000/user/favtrips`)
+    setInterval(() => this.getRequest(), 500)
     axios.get(`https://plan-trip.herokuapp.com/user/favtrips`)
     .then(res => {
       this.setState({

@@ -41,7 +41,7 @@ class DisplayFavs extends Component {
       destination: this.state.destination
     })
     .then(res => {
-
+      console.log(res)
     })
     .catch(err => {
       console.log(err)

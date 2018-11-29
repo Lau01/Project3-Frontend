@@ -225,7 +225,7 @@ class SearchResults extends Component {
           />
         </div>
           :
-          <div>Loading ...</div>
+          <div className="loading">Loading ...</div>
           }
           {/* <TripMap
             journeys={this.state.journeys}

@@ -204,10 +204,11 @@ class SearchResults extends Component {
         <div>
           {journeys.length > 0 ?
             <div className="container">
-          <div className="displaySearchContainer">
-            <div>
+            <div className="displaySearchContainer">
+            <div className="searchHeader">
               {originShort ? originShort : originFull} to {destShort ? destShort : destFull}
-              <button onClick={this.onClick}>+ Trip</button>
+              <button className="plusTripButton" onClick={this.onClick}>+ Trip</button>
+              <span>asdasd</span>
             </div>
             {journeys.map(journey =>
               <DisplaySearch

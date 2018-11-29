@@ -54,16 +54,6 @@ class TripMap extends Component {
             }}
            />
         )}
-        {/* <Polyline
-              path={convertLatLng(coordsArray)}
-              geodesic={true}
-              options={{
-                  strokeColor: "#378dff",
-                  strokeOpacity: '1',
-                  strokeWeight: 5,
-                  zIndex: 2
-              }}
-         /> */}
 
       </GoogleMap>
    )));

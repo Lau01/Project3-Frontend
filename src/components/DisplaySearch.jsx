@@ -105,13 +105,13 @@ class DisplaySearch extends Component {
 
     return(
       <div>
-        Route: {this.props.journeyNumber}
         <hr/>
+        <span>Trip: {this.props.journeyNumber + 1}</span>
         <div>
           <Moment format="hh:mm A">{startTime}</Moment> - <Moment format="hh:mm A">{arrivalTime}</Moment>
         </div>
         <div>
-          {originName} to {destinationName}
+          <span className="tripTitle">{originName} to {destinationName}</span>
           <button
           className="showTrip"
           onClick={this.handleOpenClick}

@@ -1,14 +1,7 @@
 import React, {Component} from 'react';
 // import {Link} from 'react-router-dom';
+import DisplayFavs from '../components/DisplayFavs'
 import axios from 'axios';
-
-function DisplayFavs() {
-  return(
-    <div>
-      asdasdas
-    </div>
-  )
-}
 
 class FavTrips extends Component {
   constructor() {
@@ -16,30 +9,50 @@ class FavTrips extends Component {
     this.state = {
       favTrips: []
     }
+
+    this.handleClick = this.handleClick.bind(this);
+
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3000/user/favtrips`, {
-        email: "test5@test.com"
-    })
+    axios.get(`http://localhost:3000/user/favtrips`)
     .then(res => {
-      console.log(res)
-      // this.setState({
-      //   favTrips: res.data
-      // })
-      // console.log(this.state.favTrips)
+      this.setState({
+        favTrips: res.data
+      })
+      console.log(this.state.favTrips)
     })
     .catch(err => {
       console.warn(err);
     });
   }
 
+  handleClick = () => {
+    console.log('clicked')
+    // axios.get(`http://localhost:3000/user/favtrips`)
+    // .then(res => {
+    //   this.setState({
+    //     favTrips: res.data
+    //   })
+    //   console.log('clicked', this.state.favTrips)
+    // })
+    // .catch(err => {
+    //   console.warn(err);
+    // });
+  }
 
   render() {
     return(
-      <div>
-        Your Fav Trips
-      </div>
+      <ul>
+        {this.state.favTrips.map(trip =>
+        <li className='favTripItem'>
+          <DisplayFavs
+            onClick={this.handleClick}
+            trip={trip}
+          />
+        </li>
+        )}
+      </ul>
     )
   }
 }

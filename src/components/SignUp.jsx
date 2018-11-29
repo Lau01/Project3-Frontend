@@ -50,11 +50,11 @@ class SignUp extends Component {
 
   render() {
     return(
-      <div>
+      <div className="signupContainer">
         <h2>Sign Up</h2>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Username:
+          <div>
+            <label className="labelLogin">Username:</label>
             <input
               type="text"
               name="username"
@@ -62,10 +62,10 @@ class SignUp extends Component {
               onChange={this.handleChange}
             >
             </input>
-          </label>
+          </div>
 
-          <label>
-            Email:
+          <div>
+            <label className="labelLogin">Email:</label>
             <input
               type="email"
               name="email"
@@ -73,10 +73,10 @@ class SignUp extends Component {
               onChange={this.handleChange}
             >
             </input>
-          </label>
+          </div>
 
-          <label>
-            Password:
+          <div>
+            <label className="labelLogin">Password:</label>
             <input
               type="password"
               name="password"
@@ -85,7 +85,7 @@ class SignUp extends Component {
             >
 
             </input>
-          </label>
+          </div>
 
           <input type="submit" value="Sign up"/>
         </form>

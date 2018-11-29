@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 // import Dropdown from 'react-dropdown'
 // import 'react-dropdown/style.css'
 
-
 import SearchResults from '../components/SearchResults'
 // import axios from 'axios';
 
-class SearchTrip extends Component {
+class SearchBar extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,6 +14,7 @@ class SearchTrip extends Component {
       // timeType: '',
       // timeValue: '',
       // timeNum: ''
+      showSearch: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -55,7 +55,7 @@ class SearchTrip extends Component {
     //   {value: 'departure_time', label: 'Depart at'},
     // ]
     return(
-      <div className="searchContainer">
+      <div className="searchBarContainer">
         <h2>Plan your trip</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -81,15 +81,14 @@ class SearchTrip extends Component {
           </label>
 
           <input type="submit" value="Search Trip"/>
+
 {/*
           <Dropdown options={timeOptions} onChange={this._onSelect} value={this.state.timeType} placeholder="Select an option" />       */}
 
         </form>
-
-
       </div>
     )
   }
 }
 
-export default SearchTrip;
+export default SearchBar;

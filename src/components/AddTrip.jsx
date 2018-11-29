@@ -19,7 +19,7 @@ class AddTrip extends Component {
     }
     return(
       <div>
-        <button onClick={this.handleClick}>Add +</button>
+        <button onClick={this.handleClick}>Add </button>
       </div>
     )
   }

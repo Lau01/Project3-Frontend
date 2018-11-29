@@ -208,7 +208,6 @@ class SearchResults extends Component {
             <div className="searchHeader">
               {originShort ? originShort : originFull} to {destShort ? destShort : destFull}
               <button className="plusTripButton" onClick={this.onClick}>+ Trip</button>
-              <span>asdasd</span>
             </div>
             {journeys.map(journey =>
               <DisplaySearch

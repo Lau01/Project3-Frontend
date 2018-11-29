@@ -282,7 +282,7 @@ class DisplaySearch extends Component {
     let opalCategory;
     let opalPrice;
     if (this.props.journey.fare.tickets[0]) {
-      opalCategory = `${this.props.journey.fare.tickets[0].properties.riderCategoryName}: `
+      opalCategory = ` ${this.props.journey.fare.tickets[0].properties.riderCategoryName} Train Fare: `
       opalPrice = `$${this.props.journey.fare.tickets[0].properties.priceTotalFare}`
     }
 
@@ -312,14 +312,14 @@ class DisplaySearch extends Component {
     }
 
     return(
-      <div>
+      <div className="displayTripBox" onClick={this.handleClick}>
         <hr/>
         <div>
           <Moment format="hh:mm A">{startTime}</Moment> - <Moment format="hh:mm A">{arrivalTime}</Moment>
         </div>
         <div>
           {originName} to {destinationName}
-          <button className="showTrip" onClick={this.handleClick}>Show Trip</button>
+          {/* <button className="showTrip" onClick={this.handleClick}>Show Trip</button> */}
           <span className="totalDuration"><TotalDuration legs={this.props.journey.legs}/></span>
         </div>
         {this.state.showTripDetails &&
@@ -336,192 +336,6 @@ class DisplaySearch extends Component {
     )
   }
 }
-
-
-// GOOGLE VERSION
-// class StepHtml extends Component {
-//   render() {
-//     const html = this.props.stepHtml;
-//     return <div>{ ReactHtmlParser(html) }</div>;
-//   }
-// }
-//
-// function TransitSteps(props) {
-//   console.log('transit', props)
-//   const {
-//     line,
-//     arrival_stop,
-//     departure_stop,
-//     num_stops
-//   } = props.details
-//
-//   return (
-//     <div>
-//       <div>
-//         <b>{line.name}</b>
-//       </div>
-//       {arrival_stop.name} to {departure_stop.name}, ({num_stops} stops)
-//     </div>
-//   )
-// }
-//
-// function WalkingSteps(props) {
-//   console.log('walking:', props.details)
-//   return (
-//     <div>
-//       <ul>
-//         {props.details.map(step =>
-//           <li><StepHtml stepHtml={step.html_instructions}/></li>
-//         )}
-//       </ul>
-//     </div>
-//   )
-// }
-//
-//
-// function StepDetails(props) {
-//
-//   const {
-//     steps,
-//     transit_details,
-//     travel_mode,
-//   } = props.step
-//
-//   console.log(props.step.steps)
-//   let details;
-//   if (travel_mode === "WALKING") {
-//     details = steps
-//   } else if (travel_mode === "TRANSIT") {
-//     details = transit_details
-//   }
-//
-//   return (
-//     <div>
-//       <div> --------------------------- </div>
-//       {travel_mode === "TRANSIT"
-//       ?
-//       <TransitSteps details={details}/>
-//       :
-//       <WalkingSteps details={details}/>
-//       }
-//       <div> --------------------------- </div>
-//     </div>
-//   )
-//
-// }
-//
-//
-// class Step extends Component {
-//
-//   constructor() {
-//     super();
-//     this.state = {
-//       showStep: false
-//     }
-//
-//     this.handleClick = this.handleClick.bind(this);
-//   }
-//
-//   handleClick() {
-//     this.setState({
-//       showStep: !this.state.showStep
-//     })
-//   }
-//
-//
-//
-//   render() {
-//     const {
-//       duration,
-//       distance,
-//       instructions,
-//       step
-//     } = this.props
-//
-//     // PLEASE REFACTOR THIS LATER
-//     return (
-//       <div>
-//         {duration.value < 80 || distance.value < 90
-//         ?
-//         null
-//         :
-//         <div>
-//           <span className="instructionsHeader">{instructions} : {duration.text}</span>
-//           <button className="instructionsButton" onClick={this.handleClick}>&#9660;</button>
-//           {this.state.showStep ? <StepDetails step={step}/> : null}
-//         </div>
-//         }
-//
-//       </div>
-//     )
-//   }
-// }
-//
-// function DisplaySteps(props) {
-//   return (
-//     <div>
-//       {props.steps.map(step =>
-//         <Step
-//           distance={step.distance}
-//           duration={step.duration}
-//           instructions={step.html_instructions}
-//           step={step}
-//           // travelMode={step.travel_mode}
-//         />
-//       )}
-//     </div>
-//   )
-//
-// }
-//
-//
-// function DisplayRoutes(props) {
-//   const {
-//     departure_time,
-//     arrival_time,
-//     duration,
-//     distance,
-//     start_address,
-//     end_address,
-//     steps
-//   } = props.route[0]
-//
-//   return (
-//     <div className="routeCard">
-//       <div className="tripTime">
-//         <b>{departure_time.text}</b>
-//       </div>
-//       <br/>
-//       <div>
-//         <DisplaySteps
-//           steps={steps}
-//         />
-//       </div>
-//       <div className="tripSummary">
-//         <span>Total Duration: {duration.text}</span> ,
-//         <span>Total Trip Distance: {distance.text}</span>
-//       </div>
-//     </div>
-//   )
-// }
-//
-// // DISPLAYSEARCH FOR GOOGLE VERSION
-// // class DisplaySearch extends Component {
-// //
-// //   render() {
-// //     return(
-// //       <div classname="displaySearchResults">
-// //         <h1>Routes from Search...</h1>
-// //         {this.props.routes.map(route =>
-// //           <DisplayRoutes
-// //             route={route.legs}
-// //           />
-// //         )}
-// //       </div>
-// //     )
-// //   }
-// // };
-// GOOGLE VERSION END
 
 
 

@@ -30,8 +30,10 @@ class Login extends Component {
 
       if( 'localStorage' in window ){
         localStorage.setItem('token', res.data.token);
+        this.props.history.push(`/search`);
+      } else {
+        this.props.history.push(`/login`);
       }
-      this.props.history.push(`/search`)
     })
     .catch(console.warn)
 

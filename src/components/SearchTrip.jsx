@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 // import 'react-dropdown/style.css'
 
 
-// import SearchResults from '../components/SearchResults'
+import SearchResults from '../components/SearchResults'
 // import axios from 'axios';
 
 class SearchTrip extends Component {
@@ -55,7 +55,7 @@ class SearchTrip extends Component {
     //   {value: 'departure_time', label: 'Depart at'},
     // ]
     return(
-      <div>
+      <div className="searchContainer">
         <h2>Plan your trip</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -85,6 +85,7 @@ class SearchTrip extends Component {
           <Dropdown options={timeOptions} onChange={this._onSelect} value={this.state.timeType} placeholder="Select an option" />       */}
 
         </form>
+
 
       </div>
     )

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import DisplaySearch from '../components/DisplaySearch'
+import AddTrip from '../components/AddTrip'
 
 
 class SearchResults extends Component {
@@ -13,10 +14,45 @@ class SearchResults extends Component {
       originId: '',
       destinationId: '',
       journeys: [],
+      favTrips: []
       // routes: [],
       // startAddress: '',
       // endAddress: ''
     }
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+
+  onClick(event) {
+    if(window.localStorage.getItem('token')){
+      axios.post(`http://localhost:3000/user/favtrip/${originId}/${destinationId}`,
+        {
+          email: "test5@test.com",
+          favTrip: {
+            origin: originId,
+            destination: destinationId
+          }
+        }
+      )
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.warn(err)
+      })
+      console.log('clicked add button');
+      event.preventDefault();
+    } else {
+      this.props.history.push(`/login`);
+    } // IF token
+
+
+    const {
+      originId,
+      destinationId
+    } = this.state
+
   }
 
   componentDidUpdate(prevProps) {
@@ -119,25 +155,6 @@ class SearchResults extends Component {
 
   componentDidMount() {
 
-    /////// GOOGLE VERSION
-    // const {
-    //   origin,
-    //   destination
-    // } = this.props.match.params
-    //
-    // axios.get(`http://localhost:3000/searchtrip/${origin}/${destination}`)
-    // .then( res => {
-    //
-    //   this.setState({
-    //     routes: res.data.routes,
-    //     startAddress: res.data.routes[0].legs[0].start_address,
-    //     endAddress: res.data.routes[0].legs[0].end_address
-    //   })
-    //
-    // })
-    // .catch(err => {console.warn(err)})
-    //// GOOOGLE VERSION END
-
     const {
       origin,
       destination
@@ -146,39 +163,11 @@ class SearchResults extends Component {
     /////GET ORIGIN function
     function originRequest() {
       return axios.get(`http://localhost:3000/stop/${origin}`)
-      // .then(res => {
-      //   let locationsArray = res.data.locations
-      //   // each location is an object
-      //   let bestLocation = locationsArray.filter(location => {
-      //     return location["isBest"] === true
-      //   })
-      //   this.setState({
-      //     bestOrigin: bestLocation[0],
-      //     originCoord: bestLocation[0]["coord"]
-      //   })
-      // })
-      // .catch( err => {
-      //   console.warn(err)
-      // })
+
     }
     ///////GET DESTINATION function
     function destinationRequest() {
       return axios.get(`http://localhost:3000/stop/${destination}`)
-      // .then(res => {
-      //   let locationsArray = res.data.locations
-      //   // each location is an object
-      //   let bestLocation = locationsArray.filter(location => {
-      //     return location["isBest"] === true
-      //   })
-      //
-      //   this.setState({
-      //     bestDestination: bestLocation[0],
-      //     destinationCoord: bestLocation[0]["coord"]
-      //   })
-      // })
-      // .catch( err => {
-      //   console.warn(err);
-      // })
     }
 
     // make both requests for origin and destination to stop finder API
@@ -234,6 +223,7 @@ class SearchResults extends Component {
           <br/>
           <div>
             {originShort ? originShort : originFull} to {destShort ? destShort : destFull}
+            <button onClick={this.onClick}>Add +</button>
           </div>
           {this.state.journeys.map(journey =>
             <DisplaySearch

@@ -1,6 +1,72 @@
-body {
-  margin: 20px;
+
+
+.navContainer {
+  width: 100vw;
+  height: 50px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  background-color: rgba(255, 161, 1, 0.58);
 }
+
+
+.navBar {
+  /* display: flex; */
+}
+
+.nav {
+  height: 50px;
+  line-height: 50px;
+}
+
+.searchNav {
+  margin-left: 40px;
+}
+
+.searchContainer {
+  width: 500px;
+  height: 100%;
+  border: 1px solid black;
+}
+
+.displaySearchContainer {
+  width: 500px;
+  height: 100%;
+  border: 1px solid black;
+}
+
+.displayTripBox {
+  cursor: pointer;
+  /* background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit; */
+}
+
+.userNav {
+  color: black;
+  /* flex: 1; */
+  margin: 0 5px 0 5px;
+  text-decoration: none;
+}
+
+.nav:visited {
+  text-decoration: none;
+}
+
+.logOutButton {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+
 
 .displaySearchResults {
   width: 50vw;
@@ -17,7 +83,6 @@ body {
 
 .stopTimes {
   width: 100px;
-  text-align: center;
   margin-right: 20px;
 }
 

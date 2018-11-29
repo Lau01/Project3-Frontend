@@ -28,17 +28,21 @@ class SignUp extends Component {
         password: this.state.password,
       })
       .then(res => {
-        console.log('signup', res.data.token);
+        console.log('signup', res.data);
         // set axios header
         axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
         // store local storage
         if( 'localStorage' in window ){
           localStorage.setItem('token', res.data.token);
+          this.props.history.push(`/search`);
+        } else {
+          this.props.history.push(`/signup`);
         }
 
-        this.props.history.push(`/search`)
       })
-      .catch(console.warn)
+      .catch(err => {
+        console.warn(err);
+      })
     // }
 
     event.preventDefault();

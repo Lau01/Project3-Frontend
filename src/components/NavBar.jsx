@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import '../App.css';
 import FavTrips from './FavTrips';
 import axios from 'axios';
+import train from '../components/train.svg'
 
 class NavBar extends Component {
 
@@ -28,7 +29,7 @@ class NavBar extends Component {
       <div>
         <div className="navContainer">
           <div className="nav searchNav">
-            <span className="trainEmote">🚉</span><Link to="/search">Search Trip</Link>
+            <Link to="/search"><img className="trainImage" src={train}></img> Search Trip</Link>
           </div>
           <div className="navBar">
             <span className="nav userNav">

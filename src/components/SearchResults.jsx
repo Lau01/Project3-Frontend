@@ -189,50 +189,51 @@ class SearchResults extends Component {
     })
   }
 
-    render () {
-      const originShort = this.state.bestOrigin.disassembledName;
-      const originFull = this.state.bestOrigin.name;
-      const destShort = this.state.bestDestination.disassembledName;
-      const destFull = this.state.bestDestination.name;
+  render () {
+    const originShort = this.state.bestOrigin.disassembledName;
+    const originFull = this.state.bestOrigin.name;
+    const destShort = this.state.bestDestination.disassembledName;
+    const destFull = this.state.bestDestination.name;
 
-      const {
-        journeys,
-        bestOrigin,
-        bestDestination
-      } = this.state
-      return (
-        <div>
-          {journeys.length > 0 ?
-            <div className="container">
-            <div className="displaySearchContainer">
-            <div className="searchHeader">
-              {originShort ? originShort : originFull} to {destShort ? destShort : destFull}
-              <button className="plusTripButton" onClick={this.onClick}>+ Trip</button>
-            </div>
-            {journeys.map(journey =>
-              <DisplaySearch
-              handleJourneyClick={this.handleJourneyClick}
-              journeyNumber={journeys.indexOf(journey)}
-              journey={journey}
-              />
-            )}
+    const {
+      journeys,
+      bestOrigin,
+      bestDestination
+    } = this.state
+
+    return (
+      <div>
+        {journeys.length > 0 ?
+          <div className="container">
+          <div className="displaySearchContainer">
+          <div className="searchHeader">
+            {originShort ? originShort : originFull} to {destShort ? destShort : destFull}
+            <button className="plusTripButton" onClick={this.onClick}>+ Trip</button>
           </div>
-          <TripMap
-            journeyNumber={this.state.journeyNumber}
-            journeys={journeys}
-            originCoords={bestOrigin.coord}
-            destinationCoords={bestDestination.coord}
-          />
+          {journeys.map(journey =>
+            <DisplaySearch
+            handleJourneyClick={this.handleJourneyClick}
+            journeyNumber={journeys.indexOf(journey)}
+            journey={journey}
+            />
+          )}
         </div>
-          :
-          <div className="loading">Loading ...</div>
-          }
-          {/* <TripMap
-            journeys={this.state.journeys}
-          /> */}
-        </div>
-      )
-    }
+        <TripMap
+          journeyNumber={this.state.journeyNumber}
+          journeys={journeys}
+          originCoords={bestOrigin.coord}
+          destinationCoords={bestDestination.coord}
+        />
+      </div>
+        :
+        <div className="loading">Loading ...</div>
+        }
+        {/* <TripMap
+          journeys={this.state.journeys}
+        /> */}
+      </div>
+    )
   }
+}
 
 export default SearchResults;

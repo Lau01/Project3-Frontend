@@ -9,10 +9,6 @@
 
 }
 
-.trainEmote {
-  font-size: 1.2em;
-}
-
 a {
   text-decoration: none;
 }
@@ -31,6 +27,12 @@ a:visited {
 .nav {
   height: 50px;
   line-height: 50px;
+}
+
+.trainImage {
+  position: relative;
+  top: 5px;
+
 }
 
 .tripMap {

@@ -30,7 +30,7 @@ class FavTrips extends Component {
 
   componentDidMount() {
     // axios.get(`http://localhost:3000/user/favtrips`)
-    setInterval(() => this.getRequest(), 500)
+
     axios.get(`https://plan-trip.herokuapp.com/user/favtrips`)
     .then(res => {
       this.setState({
@@ -41,6 +41,8 @@ class FavTrips extends Component {
     .catch(err => {
       console.warn(err);
     });
+
+    setInterval(() => this.getRequest(), 500)
   }
 
   handleClick = () => {

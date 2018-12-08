@@ -12,6 +12,7 @@ const convertLatLng = array => {
 class TripMap extends Component {
 
    render() {
+     
      const {
        journeys,
        journeyNumber

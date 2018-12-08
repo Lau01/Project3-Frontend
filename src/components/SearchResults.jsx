@@ -12,8 +12,8 @@ class SearchResults extends Component {
     this.state = {
       bestOrigin: {},
       bestDestination: {},
-      originId: '',
-      destinationId: '',
+      // originId: '',
+      // destinationId: '',
       journeys: [],
       favTrips: [],
       journeyNumber: 0,
@@ -21,39 +21,6 @@ class SearchResults extends Component {
 
     this.onClick = this.onClick.bind(this);
     this.handleJourneyClick = this.handleJourneyClick.bind(this);
-  }
-
-
-  onClick(event) {
-
-    const {
-      origin,
-      destination
-    } = this.props.match.params
-
-    if(window.localStorage.getItem('token')){
-      // axios.post(`http://localhost:3000/user/favtrip/${origin}/${destination}`,
-      axios.post(`https://plan-trip.herokuapp.com/user/favtrip/${origin}/${destination}`,
-        {
-          favTrip: {
-            origin: origin,
-            destination: destination
-          }
-        }
-      )
-      .then(res => {
-        console.log(res.data)
-      })
-      .catch(err => {
-        console.warn(err)
-      })
-      console.log('clicked add button');
-      event.preventDefault();
-    } else {
-      this.props.history.push(`/login`);
-    } // IF JWT token present
-
-
   }
 
   componentDidUpdate(prevProps) {
@@ -96,16 +63,16 @@ class SearchResults extends Component {
           this.setState({
             bestOrigin: bestOriginLocation[0],
             bestDestination: bestDestinationLocation[0],
-            originId: bestOriginLocation[0].id,
-            destinationId: bestDestinationLocation[0].id
+            // originId: bestOriginLocation[0].id,
+            // destinationId: bestDestinationLocation[0].id
           })
 
           const {
-            originId,
-            destinationId
+            bestOrigin,
+            bestDestination
           } = this.state
           // return axios.get(`http://localhost:3000/planner/${originId}/${destinationId}`)
-          return axios.get(`http://localhost:3000/planner/${originId}/${destinationId}`)
+          return axios.get(`https://plan-trip.herokuapp.com/planner/${bestOrigin.id}/${bestDestination.id}`)
         }))
         .then((res) => {
           this.setState({
@@ -120,19 +87,18 @@ class SearchResults extends Component {
   } //componentDidUpdate
 
   componentDidMount() {
-
     const {
       origin,
       destination
     } = this.props.match.params
 
-    /////GET ORIGIN function
+    //GET ORIGIN function
     function originRequest() {
       // return axios.get(`http://localhost:3000/stop/${origin}`)
       return axios.get(`https://plan-trip.herokuapp.com/stop/${origin}`)
 
     }
-    ///////GET DESTINATION function
+    //GET DESTINATION function
     function destinationRequest() {
       // return axios.get(`http://localhost:3000/stop/${destination}`)
       return axios.get(`https://plan-trip.herokuapp.com/stop/${destination}`)
@@ -158,18 +124,18 @@ class SearchResults extends Component {
       this.setState({
         bestOrigin: bestOriginLocation[0],
         bestDestination: bestDestinationLocation[0],
-        originId: bestOriginLocation[0].id,
-        destinationId: bestDestinationLocation[0].id
+        // originId: bestOriginLocation[0].id,
+        // destinationId: bestDestinationLocation[0].id
       })
 
     // ES6 destructuring
       const {
-        originId,
-        destinationId
+        bestOrigin,
+        bestDestination
       } = this.state
     // GET request for trip planner
     // return axios.get(`http://localhost:3000/planner/${originId}/${destinationId}`)
-      return axios.get(`https://plan-trip.herokuapp.com/planner/${originId}/${destinationId}`)
+      return axios.get(`https://plan-trip.herokuapp.com/planner/${bestOrigin.id}/${bestDestination.id}`)
     }))
     .then((res) => {
       this.setState({
@@ -181,6 +147,38 @@ class SearchResults extends Component {
     })
   } // componentDidMount
 
+  // onClick for add Fav Trip
+  onClick(event) {
+    const {
+      origin,
+      destination
+    } = this.props.match.params
+
+    //only add trip if JWT token present otherwise redirect to login
+    if(window.localStorage.getItem('token')){
+      // axios.post(`http://localhost:3000/user/favtrip/${origin}/${destination}`,
+      axios.post(`https://plan-trip.herokuapp.com/user/favtrip/${origin}/${destination}`,
+        {
+          favTrip: {
+            origin: origin,
+            destination: destination
+          }
+        }
+      )
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.warn(err)
+      })
+      console.log('clicked add button');
+      event.preventDefault();
+    } else {
+      this.props.history.push(`/login`);
+    } // IF JWT token present
+  } // onClick for add fav trip to user
+
+  // clicking a journey displays routes on Trip Map
   handleJourneyClick = (journeyNumber, showTripDetails) => {
     console.log('hello from the bottom', showTripDetails)
     this.setState({

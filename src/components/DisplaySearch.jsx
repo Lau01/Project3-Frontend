@@ -2,14 +2,9 @@ import React, {Component} from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import DisplayLegs from '../components/DisplayLegs'
-// import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import '../App.css';
 const moment = require("moment");
 const momentDurationFormatSetup = require("moment-duration-format");
-// typeof moment.duration.fn.format === "function";
-// // true
-// typeof moment.duration.format === "function";
-// // true
 
 function TotalDuration(props) {
   let totalDuration = 0;
@@ -23,7 +18,6 @@ function TotalDuration(props) {
     return `${totalDuration} mins`;
   }
 }
-
 
 class DisplaySearch extends Component {
   constructor() {
@@ -74,7 +68,7 @@ class DisplaySearch extends Component {
     let opalCategory;
     let opalPrice;
     if (this.props.journey.fare.tickets[0]) {
-      opalCategory = ` ${this.props.journey.fare.tickets[0].properties.riderCategoryName} Train Fare: `
+      opalCategory = ` ${this.props.journey.fare.tickets[0].properties.riderCategoryName} : `
       opalPrice = `$${this.props.journey.fare.tickets[0].properties.priceTotalFare}`
     }
 

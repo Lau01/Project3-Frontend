@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import {Link} from 'react-router-dom';
 import DisplayFavs from '../components/DisplayFavs'
 import axios from 'axios';
 
@@ -42,7 +41,7 @@ class FavTrips extends Component {
       console.warn(err);
     });
 
-    setInterval(() => this.getRequest(), 500)
+    setInterval(() => this.getRequest(), 1000)
   }
 
   handleClick = () => {

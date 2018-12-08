@@ -6,6 +6,7 @@ import '../App.css';
 const moment = require("moment");
 const momentDurationFormatSetup = require("moment-duration-format");
 
+// Format the time to minutes or hr/mins using moment
 function TotalDuration(props) {
   let totalDuration = 0;
     props.legs.map(leg =>
@@ -58,21 +59,22 @@ class DisplaySearch extends Component {
   }
 
   render() {
-    // console.log(this.props.journey.legs)
     const {
       legs
     } = this.props.journey
 
-
-    // If there is a opal ticket category, grab the most relavant one and display
+    // If there is a opal ticket category, grab the first one and display
     let opalCategory;
     let opalPrice;
+    let originName;
+    let destinationName;
+
     if (this.props.journey.fare.tickets[0]) {
       opalCategory = ` ${this.props.journey.fare.tickets[0].properties.riderCategoryName} : `
       opalPrice = `$${this.props.journey.fare.tickets[0].properties.priceTotalFare}`
     }
 
-    // If there is only 1 leg in the journey
+    // If there is only 1 leg in the journey, display logic for names will change
     let arrivalTime;
     if (legs.length === 1) {
       arrivalTime = legs[0].destination.arrivalTimePlanned
@@ -82,8 +84,6 @@ class DisplaySearch extends Component {
 
     const startTime = legs[0].origin.departureTimePlanned
 
-    let originName;
-    let destinationName;
     // disassembled name or name depending on what is available for Origin
     if (legs[0].origin.parent.disassembledName) {
       originName = legs[0].origin.parent.disassembledName

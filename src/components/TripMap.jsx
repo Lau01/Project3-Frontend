@@ -12,49 +12,49 @@ const convertLatLng = array => {
 class TripMap extends Component {
 
    render() {
-     
-     const {
-       journeys,
-       journeyNumber
-     } = this.props
 
-     let displayJourneyArray = journeys[journeyNumber].legs
+   const {
+     journeys,
+     journeyNumber
+   } = this.props
 
-     const GoogleTripMap = withScriptjs(withGoogleMap(props => (
-      <GoogleMap
-        defaultCenter = { { lat: -33.89773, lng: 151.11521 } }
-        defaultZoom = { 12 }
-      >
-        {this.props.journeys.map(journey =>
-            journey.legs.map(leg =>
-              <Polyline
-                 path={convertLatLng(leg.coords)}
-                 geodesic={true}
-                 options={{
-                   strokeColor: "#9c9595",
-                   strokeOpacity: '0.5',
-                   strokeWeight: 4,
-                   zIndex: 1
-                 }}
-               />
-            )
-        )}
+   let displayJourneyArray = journeys[journeyNumber].legs
 
-        {displayJourneyArray.map(leg =>
-          <Polyline
-            path={convertLatLng(leg.coords)}
-            geodesic={true}
-            options={{
-              strokeColor: "#3778FF",
-              strokeOpacity: '1',
-              strokeWeight: 5,
-              zIndex: 2
-            }}
-           />
-        )}
+   const GoogleTripMap = withScriptjs(withGoogleMap(props => (
+    <GoogleMap
+      defaultCenter = { { lat: -33.89773, lng: 151.11521 } }
+      defaultZoom = { 12 }
+    >
+      {this.props.journeys.map(journey =>
+          journey.legs.map(leg =>
+            <Polyline
+               path={convertLatLng(leg.coords)}
+               geodesic={true}
+               options={{
+                 strokeColor: "#9c9595",
+                 strokeOpacity: '0.5',
+                 strokeWeight: 4,
+                 zIndex: 1
+               }}
+             />
+          )
+      )}
 
-      </GoogleMap>
-   )));
+      {displayJourneyArray.map(leg =>
+        <Polyline
+          path={convertLatLng(leg.coords)}
+          geodesic={true}
+          options={{
+            strokeColor: "#3778FF",
+            strokeOpacity: '1',
+            strokeWeight: 5,
+            zIndex: 2
+          }}
+         />
+      )}
+
+    </GoogleMap>
+  ))); //GoogleTripMap
 
 
    return(

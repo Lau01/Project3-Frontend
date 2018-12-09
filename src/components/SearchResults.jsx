@@ -231,15 +231,6 @@ class SearchResults extends Component {
       null
     )
 
-    // let showAdd = pickerFunction(
-    //   this.state.journeys,
-    //   <div className="searchHeader">
-    //     {originName} to {destinationName}
-    //     {loggedInAddButton}
-    //   </div>,
-    //   null
-    // )
-
     return (
       <div>
         {loading ?
@@ -247,14 +238,12 @@ class SearchResults extends Component {
           :
           <div className="searchContainer">
             <div className="displayTripsContainer">
-
-              {this.state.journeys.length > 0 &&
               <div className="searchHeader">
                 {originName} to {destinationName}
                 {loggedInAddButton}
               </div>
-              }
-              
+
+
               {journeys.map(journey =>
                 <DisplaySearch
                 handleJourneyClick={this.handleJourneyClick}

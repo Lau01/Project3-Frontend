@@ -133,7 +133,24 @@ class SearchBar extends Component {
     // Display logic for fav button
     let favsText = pickerFunction(displayFavs, "Back", "Show Favs");
 
-    window.localStorage.getItem('token')
+    // display SearchResults only when journeys.length !== 0
+    let searchResults = pickerFunction(
+      journeys.length,
+      <SearchResults
+        handleJourneyClick={this.handleJourneyClick}
+        journeys={journeys}
+        bestOrigin={bestOrigin}
+        bestDestination={bestDestination}
+      />,
+      null
+    )
+
+    // Loading div during axios req, otherwise searchResults variable (which is SearchResults component when journeys.length !== 0)
+    let searchResultDiv = pickerFunction(
+      loading,
+      <div className="loading">Loading ...</div>,
+      searchResults
+    );
 
     let favButton = pickerFunction(
       localStorage.getItem('token'),
@@ -192,18 +209,7 @@ class SearchBar extends Component {
         {this.state.displayFavs ?
         <FavTrips handleFavClick={this.handleFavClick}/>
         :
-        <div>
-          {loading ?
-          <div className="loading">Loading ...</div>
-          :
-          <SearchResults
-            handleJourneyClick={this.handleJourneyClick}
-            journeys={journeys}
-            bestOrigin={bestOrigin}
-            bestDestination={bestDestination}
-          />
-          }
-        </div>
+        searchResultDiv
         }
 
         <TripMap

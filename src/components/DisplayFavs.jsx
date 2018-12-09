@@ -11,10 +11,8 @@ class DisplayFavs extends Component {
       destination: ''
     }
 
-    this.onDeleteFavClick = this.onDeleteFavClick.bind(this);
+    this.onDeleteFav = this.onDeleteFav.bind(this);
     this.handleFavClick = this.handleFavClick.bind(this);
-
-
 
   }
 
@@ -34,7 +32,7 @@ class DisplayFavs extends Component {
     // });
   }
 
-  onDeleteFavClick() {
+  onDeleteFav() {
     // axios.post('http://localhost:3000/user/deltrips', {
     axios.post('https://plan-trip.herokuapp.com/user/deltrips', {
       origin: this.state.origin,
@@ -46,19 +44,22 @@ class DisplayFavs extends Component {
     .catch(err => {
       console.log(err)
     })
+
+    this.props.handleDelete()
   }
 
   // clickDelUpdate = () => {
   //   this.props.handleUpdate();
   // }
 
-  handleFavClick = () => {
-    const {
-      origin,
-      destination
-    } = this.state
-    console.log(this)
-    this.props.history.push(`/search/${origin}/${destination}`);
+  handleFavClick (event) {
+    this.props.handleFavClick(event, this.state.origin, this.state.destination);
+    // const {
+    //   origin,
+    //   destination
+    // } = this.state
+    //
+    // this.props.history.replace(`/search`);
   }
 
   render() {
@@ -71,7 +72,7 @@ class DisplayFavs extends Component {
           {this.props.trip.origin} to {this.props.trip.destination}
         </button>
 
-        <button onClick={this.onDeleteFavClick}>Delete Trip</button>
+        <button onClick={this.onDeleteFav}>Delete Trip</button>
       </div>
     )
   }

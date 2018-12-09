@@ -14,46 +14,46 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    if( 'localStorage' in window ){
+    if ( 'localStorage' in window ){
       axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem('token')}`;
     }
   }
 
   handleLogOut() {
-    window.localStorage.removeItem('token');
-    this.props.history.push(`/search`);
+    if ( 'localStorage' in window ) {
+      window.localStorage.removeItem('token');
+      window.location.reload();
+    } else {
+      this.props.history.push(`/login`);
+    }
   }
 
   render() {
     return(
-      <div>
-        <div className="navContainer">
-          <div className="nav searchNav">
-            <Link to="/search"><img className="trainImage" src={train}></img> Search Trip</Link>
-          </div>
-          <div className="navBar">
+      <div className="navContainer">
+        <div className="nav searchNav">
+          <Link to="/search"><img className="trainImage" src={train}></img> Search Trip</Link>
+        </div>
+        <div className="navBar">
+          {window.localStorage.getItem('token') ?
+          <span className="nav userNav">
+            <button
+              onClick={this.handleLogOut}
+              className="logOutButton"
+            >
+              Log Out
+            </button>
+          </span>
+          :
+          <span>
             <span className="nav userNav">
-              <Link to="/search/favtrips">Fav Trips</Link>
+              <Link to="/signup">Sign Up</Link>
             </span>
-            {window.localStorage.getItem('token') ?
             <span className="nav userNav">
-              <button
-                onClick={this.handleLogOut}
-                className="logOutButton"
-              >
-                Log Out
-              </button>
-            </span> :
-            <span>
-              <span className="nav userNav">
-                <Link to="/signup">Sign Up</Link>
-              </span>
-              <span className="nav userNav">
-                <Link to="/login">Login</Link>
-              </span>
+              <Link to="/login">Login</Link>
             </span>
-            }
-          </div>
+          </span>
+          }
         </div>
       </div>
     )

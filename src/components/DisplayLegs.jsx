@@ -16,7 +16,6 @@ function StopsColumn(props) {
 
 
 function LegDetails(props) {
-  // console.log(props.leg.pathDescriptions)
   console.log(props.leg.stopSequence[1])
 
   const legType = props.leg.transportation.product.class;
@@ -48,7 +47,7 @@ function LegDetails(props) {
       </div>
     );
   } else {
-    // not handled? what to show?
+    // For other legs types to be added
     return <div>Leg type { legType } not supported yet...</div>;
   }
 
@@ -108,7 +107,7 @@ class DisplayLegs extends Component {
 
             {this.state.walkPath.length > 0 &&
             <div>
-            {this.props.leg.transportation.number}  {this.props.leg.transportation.description}
+              {this.props.leg.transportation.number}  {this.props.leg.transportation.description}
             </div>
             }
 

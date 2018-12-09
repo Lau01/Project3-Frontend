@@ -1,12 +1,11 @@
 
-
 .navContainer {
-  width: 100vw;
+  min-width: 600px;
+  width: 600px;
   height: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: rgba(55, 120, 255, 0.8);
-
 }
 
 a {
@@ -35,7 +34,15 @@ a:visited {
 
 }
 
+
 .tripMap {
+  height: 100%;
+  width: 70%;
+  z-index: 200;
+  top: 0px;
+  left: 600px;
+  overflow: visible;
+  position: fixed;
 }
 
 .searchNav {
@@ -48,7 +55,8 @@ a:visited {
   width: 30vw;
 }
 
-.container {
+.searchContainer {
+  overflow: scroll;
   display: grid;
   grid-template-columns: 600px auto;
   height: 100%;
@@ -67,12 +75,26 @@ a:visited {
   min-width: 40vw;
 }
 
+/*
+  ================= SearchBar.jsx
+                                */
 .searchBarContainer {
+  max-width: 5.5em;
   min-width: 40vw;
   margin-left: 20px;
 }
 
-.displaySearchContainer {
+.toFromContainer {
+  width: 350px;
+  max-width: 30vw;
+  display: inline-block;
+}
+
+.searchButton {
+  float: right;
+}
+
+.displayTripsContainer {
   padding-left: 20px;
   overflow: scroll;
   height: 85vh;

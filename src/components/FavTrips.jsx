@@ -1,74 +1,75 @@
 import React, {Component} from 'react';
 import DisplayFavs from '../components/DisplayFavs'
 import axios from 'axios';
+import {pickerFunction} from '../lib/util'
 
 class FavTrips extends Component {
   constructor() {
     super();
     this.state = {
-      favTrips: []
+      favTrips: [],
+      loading: false,
+      afterLoad: false,
+      error: null,
     }
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleFavClick = this.handleFavClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.getRequest = this.getRequest.bind(this);
   }
 
   getRequest() {
-    axios.get(`https://plan-trip.herokuapp.com/user/favtrips`)
-    .then(res => {
-      console.log(res.data)
-      this.setState({
-        favTrips: res.data
+    this.setState( {loading: true}, () => {
+      axios.get(`https://plan-trip.herokuapp.com/user/favtrips`)
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          loading: false,
+          favTrips: res.data
+        })
+        console.log(this.state.favTrips)
       })
-      console.log(this.state.favTrips)
+      .catch(err => {
+        console.warn(err);
+        this.setState({
+          error: "Please login to view your fav trips"
+        })
+      });
     })
-    .catch(err => {
-      console.warn(err);
-    });
-  }
+  } //getRequest
 
   componentDidMount() {
-    // axios.get(`http://localhost:3000/user/favtrips`)
-
-    axios.get(`https://plan-trip.herokuapp.com/user/favtrips`)
-    .then(res => {
-      this.setState({
-        favTrips: res.data
-      })
-      console.log(this.state.favTrips)
-    })
-    .catch(err => {
-      console.warn(err);
-    });
-
-    setInterval(() => this.getRequest(), 1000)
+    this.getRequest();
+    // setInterval(() => this.getRequest(), 1000)
   }
 
-  handleClick = () => {
-    console.log('clicked')
-    // axios.get(`http://localhost:3000/user/favtrips`)
-    // .then(res => {
-    //   this.setState({
-    //     favTrips: res.data
-    //   })
-    //   console.log('clicked', this.state.favTrips)
-    // })
-    // .catch(err => {
-    //   console.warn(err);
-    // });
+  // Get new list of fav trips for user when a trip is deleted
+  handleDelete = () => {
+    this.getRequest()
+  }
+
+  // Callback to handle when fav trip is clicked
+  handleFavClick = (event, origin, destination) => {
+    this.props.handleFavClick(event, origin, destination)
   }
 
   render() {
+
     return(
       <ul>
-        {this.state.favTrips.map(trip =>
+        {this.state.loading ?
+        <div>Loading Favs...</div>
+        :
+        this.state.favTrips.map(trip =>
         <li className='favTripItem'>
           <DisplayFavs
-            onClick={this.handleClick}
+            handleFavClick={this.handleFavClick}
+            handleDelete={this.handleDelete}
             trip={trip}
           />
         </li>
-        )}
+        )
+        }
       </ul>
     )
   }

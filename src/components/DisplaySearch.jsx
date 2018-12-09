@@ -3,6 +3,7 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 import DisplayLegs from '../components/DisplayLegs'
 import '../App.css';
+import {pickerFunction} from '../lib/util'
 const moment = require("moment");
 const momentDurationFormatSetup = require("moment-duration-format");
 
@@ -40,18 +41,21 @@ class DisplaySearch extends Component {
     })
   }
 
+  // toggling trip details
   handleCloseClick() {
     this.setState({
       showTripDetails: !this.state.showTripDetails
     })
   }
+
+  // if showTripDetails isfalse then click will re-render map, will then set showTripDetails to true
   handleOpenClick() {
     const {
       showTripDetails
     } = this.state
-    // if false then click will re-render map, will then set showTripDetails to true
+
     if (!showTripDetails) {
-      this.props.handleJourneyClick(this.props.journeyNumber, this.state.showTripDetails)
+      this.props.handleJourneyClick(this.props.journeyNumber)
     }
     this.setState({
       showTripDetails: !showTripDetails
@@ -60,7 +64,8 @@ class DisplaySearch extends Component {
 
   render() {
     const {
-      legs
+      legs,
+      fare
     } = this.props.journey
 
     // If there is a opal ticket category, grab the first one and display
@@ -102,7 +107,9 @@ class DisplaySearch extends Component {
         <hr/>
         <span>Trip: {this.props.journeyNumber + 1}</span>
         <div>
-          <Moment format="hh:mm A">{startTime}</Moment> - <Moment format="hh:mm A">{arrivalTime}</Moment>
+          <Moment format="hh:mm A">{startTime}</Moment>
+           -
+          <Moment format="hh:mm A">{arrivalTime}</Moment>
         </div>
         <div>
           <span className="tripTitle">{originName} to {destinationName}</span>
@@ -115,7 +122,6 @@ class DisplaySearch extends Component {
             <span>&#9660;</span>
             }
           </button>
-          {/* } */}
 
           <div className="totalDuration">
             <TotalDuration legs={this.props.journey.legs} />
@@ -131,7 +137,6 @@ class DisplaySearch extends Component {
           </div>
         )
         }
-
         <div>
           {opalCategory}{opalPrice}
         </div>

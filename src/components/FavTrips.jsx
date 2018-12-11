@@ -66,7 +66,9 @@ class FavTrips extends Component {
         <div className="loading"><PropagateLoader color={'#7D4CDB'}/></div>
         :
         <div className="favTripContainer">
-          <Text>Your Favorite Trips</Text>
+          <div className="favTripHeader">
+            <Text size="large">Your Favorite Trips</Text>
+          </div>
           <ul className="favList">
           {this.state.favTrips.map(trip =>
             <li className='favTripItem'>

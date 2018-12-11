@@ -71,7 +71,7 @@ class SearchResults extends Component {
     let destinationName = pickerFunction(destShort, destShort, destFull)
 
 
-    // If logged in, add trip button is displayed, null if not logged in
+    // If logged in, add trip button is displayed, nothing displayed if not logged in
     let loggedInAddButton = pickerFunction(
       window.localStorage.getItem('token'),
       <GrommetButton
@@ -89,7 +89,7 @@ class SearchResults extends Component {
       <div>
         <div className="searchContainer">
           <div className="searchHeader">
-            <Text size="large">
+            <Text size="small">
               {originName} to {destinationName}
             </Text>
               {loggedInAddButton}

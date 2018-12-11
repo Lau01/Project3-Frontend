@@ -92,6 +92,7 @@ class SearchBar extends Component {
           journeys: res.data.journeys
         })
       })
+      // error handling for a failed search
       .catch(err => {
         console.warn(err);
         this.setState({
@@ -100,7 +101,6 @@ class SearchBar extends Component {
       }); // end of axios promises
     }); // setState
 
-    // this.props.history.push(`/search/${origin}/${destination}`)
     event.preventDefault();
   } //handleSubmit
 
@@ -113,8 +113,10 @@ class SearchBar extends Component {
 
   // End of callbacks to handle a fav trip click.
   // When a fav trip is clicked, submit a new request with clicked origin and destination received from <DisplayFavs />
+  // Also set error state to false if previously set to error message
   handleFavClick(event, origin, destination) {
     this.handleSubmit(event, origin, destination)
+    this.setState({error: false})
   }
 
   // Display logic when show fav trip button is clicked
@@ -151,6 +153,7 @@ class SearchBar extends Component {
       null
     )
 
+    // Display logic for error message. If error is false, show the loading animation otherwise show the error message.
     let errorMessage = pickerFunction(
       error,
       <div className="stopsError">{this.state.error}</div>,

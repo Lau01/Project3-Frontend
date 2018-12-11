@@ -51,9 +51,8 @@ a:visited {
 }
 
 .loading {
-  margin-top: 100px;
-  text-align: center;
-  width: 30vw;
+  width: 580px;
+  margin: 100px 230px;
 }
 
 .searchContainer {

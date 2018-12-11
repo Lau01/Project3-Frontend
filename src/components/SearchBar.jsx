@@ -6,6 +6,8 @@ import { Favorite } from "grommet-icons";
 import TripMap from '../components/TripMap';
 import FavTrips from './FavTrips';
 import {pickerFunction} from '../lib/util';
+import { css } from 'react-emotion';
+import { PropagateLoader } from 'react-spinners';
 
 
 class SearchBar extends Component {
@@ -148,7 +150,8 @@ class SearchBar extends Component {
     // Loading div during axios req, otherwise searchResults variable (which is SearchResults component when journeys.length !== 0)
     let searchResultDiv = pickerFunction(
       loading,
-      <div className="loading">Loading ...</div>,
+      <div className="loading"><PropagateLoader color={'#7D4CDB'}/></div>,
+      // <div className="loading">Loading ...</div>,
       searchResults
     );
 

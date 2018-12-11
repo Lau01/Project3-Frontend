@@ -43,6 +43,7 @@ react-moment
 react-router-dom
 react-scripts
 styled-components
+react-spinners
 ```
 
 ### To-Do and Wishlist

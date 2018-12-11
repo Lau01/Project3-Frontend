@@ -3,6 +3,8 @@ import DisplayFavs from '../components/DisplayFavs'
 import axios from 'axios';
 import {pickerFunction} from '../lib/util';
 import { Text, Button as GrommetButton, Grommet } from 'grommet';
+import { css } from 'react-emotion';
+import { PropagateLoader } from 'react-spinners';
 
 class FavTrips extends Component {
   constructor() {
@@ -59,7 +61,7 @@ class FavTrips extends Component {
       <div>
         {this.state.loading ?
 
-        <div>Loading Favs...</div>
+        <div className="loading"><PropagateLoader color={'#7D4CDB'}/></div>
         :
         <div className="favTripContainer">
           <Text>Your Favorite Trips</Text>

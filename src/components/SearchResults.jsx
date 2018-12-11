@@ -9,8 +9,6 @@ import {pickerFunction} from '../lib/util';
 // import addButtonTheme from '../custom-grommet-themes/themes';
 
 
-
-
 class SearchResults extends Component {
 
   constructor() {
@@ -21,7 +19,6 @@ class SearchResults extends Component {
       journeys: [],
       favTrips: [],
       journeyNumber: 0,
-      loading: false
     }
 
     this.onAddTripClick = this.onAddTripClick.bind(this);
@@ -74,7 +71,6 @@ class SearchResults extends Component {
       journeys,
       bestOrigin,
       bestDestination,
-      loading
     } = this.props
 
     // Helper function to use short name if available
@@ -98,28 +94,24 @@ class SearchResults extends Component {
 
     return (
       <div>
-        {loading ?
-          <div className="loading">Loading ...</div>
-          :
-          <div className="searchContainer">
-            <div className="searchHeader">
-              <Text size="large">
-                {originName} to {destinationName}
-              </Text>
-                {loggedInAddButton}
-            </div>
-            <div className="displayTripsContainer">
-
-              {journeys.map(journey =>
-                <DisplaySearch
-                handleJourneyClick={this.handleJourneyClick}
-                journeyNumber={journeys.indexOf(journey)}
-                journey={journey}
-                />
-              )}
-            </div>
+        <div className="searchContainer">
+          <div className="searchHeader">
+            <Text size="large">
+              {originName} to {destinationName}
+            </Text>
+              {loggedInAddButton}
           </div>
-        }
+          <div className="displayTripsContainer">
+
+            {journeys.map(journey =>
+              <DisplaySearch
+              handleJourneyClick={this.handleJourneyClick}
+              journeyNumber={journeys.indexOf(journey)}
+              journey={journey}
+              />
+            )}
+          </div>
+        </div>
       </div>
     )
   }

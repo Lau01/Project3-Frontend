@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-
 import SearchResults from '../components/SearchResults'
 import axios from 'axios';
 import { FormField, TextInput, Button, Grommet } from 'grommet';
+import { Favorite } from "grommet-icons";
 import TripMap from '../components/TripMap';
 import FavTrips from './FavTrips';
 import {pickerFunction} from '../lib/util';
@@ -165,7 +165,7 @@ class SearchBar extends Component {
 
     return(
       <div className="searchBarContainer">
-        <h3>Plan your trip</h3>
+        {/* <h3>Plan your trip</h3> */}
         <form onSubmit={this.handleSubmit}>
           <div className="toFromContainer">
             <FormField label="From:">

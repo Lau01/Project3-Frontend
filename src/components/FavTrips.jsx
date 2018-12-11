@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import DisplayFavs from '../components/DisplayFavs'
 import axios from 'axios';
-import {pickerFunction} from '../lib/util'
+import {pickerFunction} from '../lib/util';
+import { Text, Button as GrommetButton, Grommet } from 'grommet';
 
 class FavTrips extends Component {
   constructor() {
@@ -19,15 +20,14 @@ class FavTrips extends Component {
   }
 
   getRequest() {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem('token')}`
     this.setState( {loading: true}, () => {
       axios.get(`https://plan-trip.herokuapp.com/user/favtrips`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           loading: false,
           favTrips: res.data
         })
-        console.log(this.state.favTrips)
       })
       .catch(err => {
         console.warn(err);
@@ -56,21 +56,28 @@ class FavTrips extends Component {
   render() {
 
     return(
-      <ul>
+      <div>
         {this.state.loading ?
+
         <div>Loading Favs...</div>
         :
-        this.state.favTrips.map(trip =>
-        <li className='favTripItem'>
-          <DisplayFavs
-            handleFavClick={this.handleFavClick}
-            handleDelete={this.handleDelete}
-            trip={trip}
-          />
-        </li>
-        )
-        }
-      </ul>
+        <div className="favTripContainer">
+          <Text>Your Favorite Trips</Text>
+          <ul className="favList">
+          {this.state.favTrips.map(trip =>
+            <li className='favTripItem'>
+              <hr />
+              <DisplayFavs
+                handleFavClick={this.handleFavClick}
+                handleDelete={this.handleDelete}
+                trip={trip}
+              />
+            </li>
+          )}
+          </ul>
+        </div>
+      }
+      </div>
     )
   }
 }

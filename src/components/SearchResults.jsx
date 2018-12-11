@@ -1,9 +1,23 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import DisplaySearch from '../components/DisplaySearch'
-import AddTrip from '../components/AddTrip'
-import TripMap from '../components/TripMap'
-import {pickerFunction} from '../lib/util'
+import DisplaySearch from '../components/DisplaySearch';
+import AddTrip from '../components/AddTrip';
+import TripMap from '../components/TripMap';
+import { Text, Button as GrommetButton, Grommet } from 'grommet';
+import { Add } from "grommet-icons";
+import {pickerFunction} from '../lib/util';
+// import addButtonTheme from '../custom-grommet-themes/themes';
+
+const addButtonTheme = {
+  color: "dark-3",
+  button: {
+    border: {
+      color: "dark-3"
+    }
+  }
+}
+
+
 
 class SearchResults extends Component {
 
@@ -222,12 +236,14 @@ class SearchResults extends Component {
     // if logged in, add trip button is displayed, null if not
     let loggedInAddButton = pickerFunction(
       window.localStorage.getItem('token'),
-       <button
-      className="plusTripButton"
+      <GrommetButton
+      color="dark-3"
+      icon={<Add />}
+      label="Trip"
       onClick={this.onAddTripClick}
+      margin={{"left":"10px"}}
       >
-        + Trip
-      </button>,
+      </GrommetButton>,
       null
     )
 
@@ -239,10 +255,12 @@ class SearchResults extends Component {
           <div className="searchContainer">
             <div className="displayTripsContainer">
               <div className="searchHeader">
-                {originName} to {destinationName}
-                {loggedInAddButton}
-              </div>
+                <Text size="large">
+                  {originName} to {destinationName}
+                </Text>
+                  {loggedInAddButton}
 
+              </div>
 
               {journeys.map(journey =>
                 <DisplaySearch

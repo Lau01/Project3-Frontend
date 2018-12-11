@@ -1,7 +1,7 @@
 
 .navContainer {
   min-width: 600px;
-  width: 600px;
+  width: 580px;
   height: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -9,6 +9,7 @@
 }
 
 a {
+  color: black;
   text-decoration: none;
 }
 
@@ -56,14 +57,13 @@ a:visited {
 }
 
 .searchContainer {
-  overflow: scroll;
   display: grid;
-  grid-template-columns: 600px auto;
+  grid-template-columns: 580px auto;
   height: 100%;
 }
 
 .searchHeader {
-  margin: 20px 0 20px 0;
+  margin-top: 20px;
 }
 
 .tripTitle {
@@ -79,14 +79,13 @@ a:visited {
   ================= SearchBar.jsx
                                 */
 .searchBarContainer {
-  max-width: 5.5em;
   min-width: 40vw;
   margin-left: 20px;
 }
 
 .toFromContainer {
+  padding-top: 20px;
   width: 350px;
-  max-width: 30vw;
   display: inline-block;
 }
 
@@ -95,8 +94,7 @@ a:visited {
 }
 
 .displayTripsContainer {
-  padding-left: 20px;
-  overflow: scroll;
+  padding-right: 20px;
   height: 85vh;
   max-height: 85vh;
 }
@@ -129,13 +127,19 @@ a:visited {
   outline: inherit;
 }
 
-.favTrip {
+.favTripContainer {
+  width: 580px;
+  padding: 15px 20px 0 0;
+}
+
+.favList {
+  padding-right: 20px;
+  padding: 0px;
 }
 
 .favTripItem {
   min-width: 300px;
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
-  width: 40vw;
+  width: 580px;
   height: 100%;
   list-style: none;
 }
@@ -149,6 +153,16 @@ a:visited {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+.favTripButton > span {
+  line-height: 1.5em;
+  text-align: left;
+  display: block;
+}
+
+.trashButton {
+  float: right;
 }
 
 .displaySearchResults {

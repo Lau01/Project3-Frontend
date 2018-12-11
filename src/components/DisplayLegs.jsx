@@ -48,7 +48,10 @@ function LegDetails(props) {
         {props.leg.stopSequence.map(step =>
           step.arrivalTimePlanned
           ?
-          <StopsColumn time={step.arrivalTimePlanned} stopName={step.name}/>
+          <StopsColumn
+            time={step.arrivalTimePlanned}
+            stopName={step.name}
+          />
           :
           null
         )}

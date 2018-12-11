@@ -90,7 +90,7 @@ class SearchResults extends Component {
       icon={<Add />}
       label="Trip"
       onClick={this.onAddTripClick}
-      margin={{"left":"10px"}}
+      className="addTripButton"
       >
       </GrommetButton>,
       null
@@ -102,13 +102,13 @@ class SearchResults extends Component {
           <div className="loading">Loading ...</div>
           :
           <div className="searchContainer">
+            <div className="searchHeader">
+              <Text size="large">
+                {originName} to {destinationName}
+              </Text>
+                {loggedInAddButton}
+            </div>
             <div className="displayTripsContainer">
-              <div className="searchHeader">
-                <Text size="large">
-                  {originName} to {destinationName}
-                </Text>
-                  {loggedInAddButton}
-              </div>
 
               {journeys.map(journey =>
                 <DisplaySearch

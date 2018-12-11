@@ -57,12 +57,23 @@ a:visited {
 }
 
 .searchContainer {
-  display: grid;
-  grid-template-columns: 580px auto;
+  margin-right: 20px;
+  margin-top: 50px;
+  display: block;
 }
 
 .searchHeader {
-  margin-top: 20px;
+  width: 540px;
+  border-top: 4px solid #7D4CDB;
+  background-color: rgba(125,76,219, 0.2);
+  padding: 15px 10px;
+}
+
+.addTripButton {
+  position: relative;
+  top: -4px;
+  left: -5px;
+  float: right;
 }
 
 .tripTitle {
@@ -94,9 +105,11 @@ a:visited {
 }
 
 .displayTripsContainer {
-  padding-right: 20px;
-  height: 85vh;
-  max-height: 85vh;
+  padding: 15px 15px;
+  display: block;
+  height: 65vh;
+  overflow: scroll;
+  margin-top: 5px;
 }
 
 .displayTripBox {
@@ -175,10 +188,11 @@ a:visited {
 }
 
 .displaySearchResults {
-  width: 50vw;
+  width: 520px;
 }
 
 .searchResult {
+  width: 520px;
   line-height: 1.5em;
 }
 
@@ -196,6 +210,10 @@ a:visited {
   margin-right: 20px;
 }
 
+.stopNames {
+  font-weight: 300;
+}
+
 .showDetailsButton {
   float: right;
   padding: 0px;
@@ -203,6 +221,7 @@ a:visited {
 }
 
 .showButtonText {
+  font-weight: 300;
   opacity: 0.7;
 }
 
@@ -223,6 +242,18 @@ a:visited {
 .showTrip {
   float: right;
   margin: 0 10px 0 10px;
+}
+
+.tripTime {
+  font-weight: bold;
+}
+
+.searchNamesContainer {
+  margin: 8px 0 2px 0;
+}
+
+.searchNamesContainer > span {
+  display: block;
 }
 
 .plusTripButton {

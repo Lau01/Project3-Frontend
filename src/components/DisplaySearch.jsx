@@ -108,7 +108,7 @@ class DisplaySearch extends Component {
     return(
       <div className="searchResult">
         <hr/>
-        <span>
+        <span className="tripTime">
           Trip: {this.props.journeyNumber + 1}
           <GrommetButton
           className="showTrip"
@@ -127,7 +127,14 @@ class DisplaySearch extends Component {
           <Moment format="hh:mm A">{arrivalTime}</Moment>
         </div>
         <div>
-          <span className="tripTitle">{originName} to {destinationName}</span>
+          <div className="searchNamesContainer">
+            <span>
+              From: {originName}
+            </span>
+            <span>
+              To: {destinationName}
+            </span>
+          </div>
           <div className="totalDuration">
             <TotalDuration legs={this.props.journey.legs} />
           </div>

@@ -69,7 +69,7 @@ class TripMap extends Component {
             path={convertLatLng(leg.coords)}
             geodesic={true}
             options={{
-              strokeColor: "#3778FF",
+              strokeColor: "#7D4CDB",
               strokeOpacity: '1',
               strokeWeight: 5,
               zIndex: 2

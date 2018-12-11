@@ -133,7 +133,7 @@ class SearchBar extends Component {
     // Display logic for fav button
     let favsText = pickerFunction(displayFavs, "Back", "Show Favs");
 
-    // display SearchResults only when journeys.length !== 0
+    // Display SearchResults only when journeys.length !== 0
     let searchResults = pickerFunction(
       journeys.length,
       <SearchResults
@@ -152,6 +152,7 @@ class SearchBar extends Component {
       searchResults
     );
 
+    // The favorite button only shows if a user is logged in
     let favButton = pickerFunction(
       localStorage.getItem('token'),
       <Button
@@ -169,11 +170,6 @@ class SearchBar extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="toFromContainer">
             <FormField label="From:">
-              {/* <TextInput
-                name="origin"
-                value={this.state.origin}
-                onChange={this.handleChange}
-              /> */}
               <TextInput
                 name="origin"
                 ref={el => this.origin = el}
@@ -181,11 +177,6 @@ class SearchBar extends Component {
             </FormField>
 
             <FormField label="To:">
-              {/* <TextInput
-                name="destination"
-                value={this.state.destination}
-                onChange={this.handleChange}
-              /> */}
               <TextInput
                 name="origin"
                 ref={el => this.destination = el}
@@ -198,12 +189,6 @@ class SearchBar extends Component {
               margin={{"left":"10px"}}
             />
             {favButton}
-            {/* <Button
-              className="searchButton"
-              onClick={this.onClickFavsButton}
-              label={favsText}
-              margin={{"left":"10px"}}
-            /> */}
           </div>
         </form>
         {this.state.displayFavs ?

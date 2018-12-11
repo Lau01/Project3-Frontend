@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import { Text, Button as GrommetButton, Grommet } from 'grommet';
+import { Up, Down } from "grommet-icons";
 const moment = require("moment");
 const momentDurationFormatSetup = require("moment-duration-format");
 
+//  Format the stop times using Moment.js
 function StopsColumn(props) {
   return (
       <div>
@@ -14,9 +17,15 @@ function StopsColumn(props) {
   )
 }
 
-
+// Display logic for the different type of travel types (dependent on Trip Planner API)
+// 1: Train
+// 4: Light Rail
+// 5: Bus
+// 7: Coach
+// 9: Ferry
+// 11: School Bus
+// 99 and 100: Walk
 function LegDetails(props) {
-  console.log(props.leg.stopSequence[1])
 
   const legType = props.leg.transportation.product.class;
 
@@ -32,23 +41,22 @@ function LegDetails(props) {
         </ul>
       </div>
     );
-  } else if( legType === 1 || legType === 5){
-    // TRAIN
+  } else if( legType === 1 || legType === 5 || legType === 9){
+    // TRAIN or BUS or Ferry
     return (
       <div>
-        {/* {legType === 1 ? <span>Train Stops</span> : <span>Bus Stops</span>} */}
         {props.leg.stopSequence.map(step =>
-            step.arrivalTimePlanned
-            ?
-            <StopsColumn time={step.arrivalTimePlanned} stopName={step.name}/>
-            :
-            null
+          step.arrivalTimePlanned
+          ?
+          <StopsColumn time={step.arrivalTimePlanned} stopName={step.name}/>
+          :
+          null
         )}
       </div>
     );
   } else {
-    // For other legs types to be added
-    return <div>Leg type { legType } not supported yet...</div>;
+    // For other legs types
+    return <div>Leg type { legType } not supported yet</div>;
   }
 
 }
@@ -64,6 +72,7 @@ class DisplayLegs extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // have to take away first and last array elements of the path description if it is a walking route to prevent errors
   componentDidMount() {
     let walkPath = [];
     if (this.props.leg.pathDescriptions) {
@@ -77,6 +86,7 @@ class DisplayLegs extends Component {
 
   }
 
+  // Toggle state for displaying the detailed steps of a trip
   handleClick() {
     this.setState({
       showStep: !this.state.showStep
@@ -95,14 +105,22 @@ class DisplayLegs extends Component {
     } = this.state
 
     return (
-      <div>
+      <div className='tripLegs'>
         <ul>
           <li>
             <span>{origin.name}</span>
             {walkPath.length === 0 &&
-              <button className="showDetailsButton" onClick={this.handleClick}>
-                Show Details
-              </button>
+              <GrommetButton
+              className="showDetailsButton"
+              onClick={this.handleClick}
+              margin={{"left":"10px"}}
+              >
+                {showStep ?
+                  <span className="showButtonText">Show Less</span>
+                  :
+                  <span className="showButtonText">Show More</span>
+                }
+              </GrommetButton>
             }
 
             {this.state.walkPath.length > 0 &&
@@ -114,7 +132,6 @@ class DisplayLegs extends Component {
             {showStep &&
             <LegDetails leg={this.props.leg} walkPath={walkPath} />
             }
-            {/* <div>{destination.name}</div> */}
           </li>
         </ul>
       </div>

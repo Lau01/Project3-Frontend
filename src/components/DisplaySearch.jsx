@@ -4,10 +4,13 @@ import 'moment-timezone';
 import DisplayLegs from '../components/DisplayLegs'
 import '../App.css';
 import {pickerFunction} from '../lib/util'
+import { Text, Button as GrommetButton, Grommet } from 'grommet';
+import { Up, Down } from "grommet-icons";
 const moment = require("moment");
 const momentDurationFormatSetup = require("moment-duration-format");
 
-// Format the time to minutes or hr/mins using moment
+
+// Format the time to minutes or hr/mins using moment.js
 function TotalDuration(props) {
   let totalDuration = 0;
     props.legs.map(leg =>
@@ -74,9 +77,9 @@ class DisplaySearch extends Component {
     let originName;
     let destinationName;
 
-    if (this.props.journey.fare.tickets[0]) {
-      opalCategory = ` ${this.props.journey.fare.tickets[0].properties.riderCategoryName} : `
-      opalPrice = `$${this.props.journey.fare.tickets[0].properties.priceTotalFare}`
+    if (fare.tickets[0]) {
+      opalCategory = ` ${fare.tickets[0].properties.riderCategoryName} : `
+      opalPrice = `$${fare.tickets[0].properties.priceTotalFare}`
     }
 
     // If there is only 1 leg in the journey, display logic for names will change
@@ -89,13 +92,13 @@ class DisplaySearch extends Component {
 
     const startTime = legs[0].origin.departureTimePlanned
 
-    // disassembled name or name depending on what is available for Origin
+    // Short name or full name depending on what is available for Origin
     if (legs[0].origin.parent.disassembledName) {
       originName = legs[0].origin.parent.disassembledName
     } else {
       originName = legs[0].origin.name
     }
-    // name for destination
+    // Short name or full name depending on what is available for Destination
     if (legs[legs.length - 1].destination.parent.disassembledName) {
       destinationName = legs[legs.length - 1].destination.parent.disassembledName
     } else {
@@ -103,9 +106,21 @@ class DisplaySearch extends Component {
     }
 
     return(
-      <div>
+      <div className="searchResult">
         <hr/>
-        <span>Trip: {this.props.journeyNumber + 1}</span>
+        <span>
+          Trip: {this.props.journeyNumber + 1}
+          <GrommetButton
+          className="showTrip"
+          onClick={this.handleOpenClick}
+          margin={{"left":"10px"}}
+          >
+            {this.state.showTripDetails ?
+            <span>{<Up />}</span> :
+            <span>{<Down />}</span>
+            }
+          </GrommetButton>
+        </span>
         <div>
           <Moment format="hh:mm A">{startTime}</Moment>
            -
@@ -113,16 +128,6 @@ class DisplaySearch extends Component {
         </div>
         <div>
           <span className="tripTitle">{originName} to {destinationName}</span>
-          <button
-          className="showTrip"
-          onClick={this.handleOpenClick}
-          >
-            {this.state.showTripDetails ?
-            <span>&#9650;</span> :
-            <span>&#9660;</span>
-            }
-          </button>
-
           <div className="totalDuration">
             <TotalDuration legs={this.props.journey.legs} />
           </div>

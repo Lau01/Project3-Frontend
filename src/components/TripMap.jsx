@@ -19,13 +19,13 @@ class TripMap extends Component {
   //   }
   // }
 
-  // shouldComponentUpdate(nextProps, nextState){
-  //   if(this.props.journeys === nextProps.journeys || this.props.journeySelected === nextProps.journeySelected){
-  //     return false
-  //   } else {
-  //     return true
-  //   }
-  // }
+  shouldComponentUpdate(nextProps, nextState){
+    if (this.props.journeys[0] === nextProps.journeys[0]){
+      return false
+    } else {
+      return true
+    }
+  }
 
    render() {
 

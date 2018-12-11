@@ -8,14 +8,6 @@ import { Add } from "grommet-icons";
 import {pickerFunction} from '../lib/util';
 // import addButtonTheme from '../custom-grommet-themes/themes';
 
-const addButtonTheme = {
-  color: "dark-3",
-  button: {
-    border: {
-      color: "dark-3"
-    }
-  }
-}
 
 
 
@@ -36,152 +28,14 @@ class SearchResults extends Component {
     this.handleJourneyClick = this.handleJourneyClick.bind(this);
   }
 
-  // componentDidUpdate(prevProps) {
-  //
-  //   // const {
-  //   //   origin,
-  //   //   destination
-  //   // } = this.props.match.params
-  //
-  //   const {
-  //     origin,
-  //     destination
-  //   } = this.props
-  //
-  //   if (this.props.origin !== prevProps.origin || this.props.destination !== prevProps.destination) {
-  //
-  //     /////GET ORIGIN
-  //     function originRequest() {
-  //       // return axios.get(`http://localhost:3000/stop/${origin}`)
-  //       return axios.get(`https://plan-trip.herokuapp.com/stop/${origin}`)
-  //     }
-  //     ///////GET DESTINATION
-  //     function destinationRequest() {
-  //       // return axios.get(`http://localhost:3000/stop/${destination}`)
-  //       return axios.get(`https://plan-trip.herokuapp.com/stop/${destination}`)
-  //     }
-  //
-  //     // setState loading:true with callback as axios request
-  //     this.setState( {loading: true}, () => {
-  //       // make both requests for origin and destination to stop finder API
-  //       axios.all([originRequest(), destinationRequest()])
-  //       .then(axios.spread((originRes, destinationRes) => {
-  //         // do something with both responses
-  //         let locationsOriginArray = originRes.data.locations
-  //         let locationsDestinationArray = destinationRes.data.locations
-  //
-  //         // each location is an object
-  //         // filter best search result for both origin and destination
-  //         let bestOriginLocation = locationsOriginArray.filter(location => {
-  //           return location["isBest"] === true;
-  //         })
-  //
-  //         let bestDestinationLocation = locationsDestinationArray.filter(location => {
-  //           return location["isBest"] === true;
-  //         })
-  //
-  //         this.setState({
-  //           bestOrigin: bestOriginLocation[0],
-  //           bestDestination: bestDestinationLocation[0],
-  //         })
-  //
-  //         const {
-  //           bestOrigin,
-  //           bestDestination
-  //         } = this.state
-  //         // return axios.get(`http://localhost:3000/planner/${originId}/${destinationId}`)
-  //         return axios.get(`https://plan-trip.herokuapp.com/planner/${bestOrigin.id}/${bestDestination.id}`)
-  //       }))
-  //       .then((res) => {
-  //         this.setState({
-  //           loading: false,
-  //           journeys: res.data.journeys
-  //         })
-  //
-  //       })
-  //       .catch(err => {
-  //         console.warn(err);
-  //       }) // end of axios promises
-  //     })
-  //   } // if prevProps !== ...
-  // } //componentDidUpdate
-
-  // componentDidMount() {
-  //   // const {
-  //   //   origin,
-  //   //   destination
-  //   // } = this.props.match.params
-  //
-  //   const {
-  //     origin,
-  //     destination
-  //   } = this.props
-  //
-  //   //GET ORIGIN function
-  //   function originRequest() {
-  //     // return axios.get(`http://localhost:3000/stop/${origin}`)
-  //     return axios.get(`https://plan-trip.herokuapp.com/stop/${origin}`)
-  //
-  //   }
-  //   //GET DESTINATION function
-  //   function destinationRequest() {
-  //     // return axios.get(`http://localhost:3000/stop/${destination}`)
-  //     return axios.get(`https://plan-trip.herokuapp.com/stop/${destination}`)
-  //   }
-  //   // setState loading:true with callback as axios request
-  //   this.setState( {loading: true}, () => {
-  //     // make both requests for origin and destination to stop finder API
-  //     axios.all([originRequest(), destinationRequest()])
-  //     .then(axios.spread((originRes, destinationRes) => {
-  //       // do something with both responses
-  //       let locationsOriginArray = originRes.data.locations
-  //       let locationsDestinationArray = destinationRes.data.locations
-  //
-  //       // each location is an object
-  //       // filter best search result for both origin and destination
-  //       let bestOriginLocation = locationsOriginArray.filter(location => {
-  //         return location["isBest"] === true;
-  //       })
-  //
-  //       let bestDestinationLocation = locationsDestinationArray.filter(location => {
-  //         return location["isBest"] === true;
-  //       })
-  //
-  //       this.setState({
-  //         bestOrigin: bestOriginLocation[0],
-  //         bestDestination: bestDestinationLocation[0],
-  //       })
-  //
-  //     // ES6 destructuring
-  //       const {
-  //         bestOrigin,
-  //         bestDestination
-  //       } = this.state
-  //     // GET request for trip planner
-  //     // return axios.get(`http://localhost:3000/planner/${originId}/${destinationId}`)
-  //       return axios.get(`https://plan-trip.herokuapp.com/planner/${bestOrigin.id}/${bestDestination.id}`)
-  //     }))
-  //     .then((res) => {
-  //       this.setState({
-  //         loading: false,
-  //         journeys: res.data.journeys
-  //       })
-  //       console.log(this.state.journeys)
-  //     })
-  //     .catch(err => {
-  //       console.warn(err);
-  //     }) // end of axios promises
-  //   }) // setState
-  // } // componentDidMount
-
-  // onClick for add Fav Trip
+  // onClick for add Fav Trip. On click will make an axios post to fav Trips to add the specified trip.
   onAddTripClick(event) {
     const {
       bestOrigin,
       bestDestination
     } = this.props
 
-    //only add trip if JWT token present otherwise redirect to login
+    // Only add trip if JWT token present otherwise redirect to login
     if(window.localStorage.getItem('token')){
       // axios.post(`http://localhost:3000/user/favtrip/${origin}/${destination}`,
       axios.post(`https://plan-trip.herokuapp.com/user/favtrip/${bestOrigin.name}/${bestDestination.name}`,
@@ -198,19 +52,14 @@ class SearchResults extends Component {
       .catch(err => {
         console.warn(err)
       })
-      console.log('clicked add button');
       event.preventDefault();
     } else {
       this.props.history.push('/login');
     } // IF JWT token present
   } // onClick for add fav trip to user
 
-  // clicking display journey details shows routes on Trip Map
+  // Clicking display journey details shows routes on Trip Map
   handleJourneyClick = (journeyNumber, showTripDetails) => {
-    // this.setState({
-    //   journeyNumber: journeyNumber,
-    //   showTripDetails: showTripDetails
-    // })
     this.props.handleJourneyClick(journeyNumber, showTripDetails)
   }
 
@@ -228,12 +77,12 @@ class SearchResults extends Component {
       loading
     } = this.props
 
-    // helper function to determine which name to use
+    // Helper function to use short name if available
     let originName = pickerFunction(originShort, originShort, originFull);
     let destinationName = pickerFunction(destShort, destShort, destFull)
 
 
-    // if logged in, add trip button is displayed, null if not
+    // If logged in, add trip button is displayed, null if not logged in
     let loggedInAddButton = pickerFunction(
       window.localStorage.getItem('token'),
       <GrommetButton
@@ -259,7 +108,6 @@ class SearchResults extends Component {
                   {originName} to {destinationName}
                 </Text>
                   {loggedInAddButton}
-
               </div>
 
               {journeys.map(journey =>

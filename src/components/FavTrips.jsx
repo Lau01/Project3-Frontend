@@ -66,7 +66,6 @@ class FavTrips extends Component {
           <ul className="favList">
           {this.state.favTrips.map(trip =>
             <li className='favTripItem'>
-              <hr />
               <DisplayFavs
                 handleFavClick={this.handleFavClick}
                 handleDelete={this.handleDelete}

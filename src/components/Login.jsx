@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import {Link} from 'react-router-dom';
+import { Button as GrommetButton, Grommet } from 'grommet';
 import axios from 'axios';
 
 class Login extends Component {
@@ -78,8 +78,13 @@ class Login extends Component {
             >
             </input>
           </div>
+          <GrommetButton
+            label="Login"
+            type="submit"
+            margin={{"left":"150px"}}
+          />
 
-          <input type="submit" value="Login"/>
+
         </form>
       </div>
     )

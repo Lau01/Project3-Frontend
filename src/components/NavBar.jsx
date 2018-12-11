@@ -14,13 +14,16 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
+    // check if there is entry in localStorage.
     if ( 'localStorage' in window ){
+      // set all axios requests to have an Authorization header of Bearer <token>
       axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem('token')}`;
     }
   }
 
   handleLogOut() {
     if ( 'localStorage' in window ) {
+      // on logout, delete the JWT token stored in local storage
       window.localStorage.removeItem('token');
       window.location.reload();
     } else {

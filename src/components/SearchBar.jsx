@@ -24,7 +24,6 @@ class SearchBar extends Component {
       displayFavs: false,
     }
 
-    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleJourneyClick = this.handleJourneyClick.bind(this);
     this.onClickFavsButton = this.onClickFavsButton.bind(this);
@@ -109,12 +108,12 @@ class SearchBar extends Component {
     })
   }
 
-  // When a fav trip is clicked
+  // When a fav trip is clicked, submit a new request with clicked origin and destination of favTrip
   handleFavClick(event, origin, destination) {
     this.handleSubmit(event, origin, destination)
   }
 
-  // When show fav trip button is clicked
+  // Display logic when show fav trip button is clicked
   onClickFavsButton() {
     this.setState({
       displayFavs: !this.state.displayFavs
@@ -147,11 +146,12 @@ class SearchBar extends Component {
       null
     )
 
-    // Loading div during axios req, otherwise searchResults variable (which is SearchResults component when journeys.length !== 0)
+    // Loading div during axios req, otherwise searchResults variable (which is SearchResults component when journeys.length !== 0). Using react-spinners
     let searchResultDiv = pickerFunction(
       loading,
-      <div className="loading"><PropagateLoader color={'#7D4CDB'}/></div>,
-      // <div className="loading">Loading ...</div>,
+      <div className="loading">
+        <PropagateLoader color={'#7D4CDB'}/>
+      </div>,
       searchResults
     );
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { Button as GrommetButton, Grommet } from 'grommet';
 
 class SignUp extends Component {
   constructor() {
@@ -88,7 +89,11 @@ class SignUp extends Component {
             </input>
           </div>
 
-          <input type="submit" value="Sign up"/>
+          <GrommetButton
+            label="Sign Up"
+            type="submit"
+            margin={{"left":"130px"}}
+          />
         </form>
       </div>
     )

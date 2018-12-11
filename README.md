@@ -47,9 +47,12 @@ react-spinners
 ```
 
 ### To-Do and Wishlist
-* Display journey that user has clicked with accompanying UI
+* Display trip on Google Maps that has been clicked with accompanying UI
+* UI/page for login and signup
 * Prevent Google Maps component from re-rendering and only re-render Polylines for routes
 * Boundaries on Google Maps component is dynamic
 * Add multiple search parameters i.e. Leave now, Arrive by, etc
+* Use real time data in the Trip Planner API and display it
 * Responsiveness
 * Refactor components and add more utility/helper functions
+* Error handling for searches, login/signup and unauthorized access

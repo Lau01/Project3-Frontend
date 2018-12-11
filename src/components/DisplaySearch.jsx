@@ -53,9 +53,7 @@ class DisplaySearch extends Component {
 
   // if showTripDetails isfalse then click will re-render map, will then set showTripDetails to true
   handleOpenClick() {
-    const {
-      showTripDetails
-    } = this.state
+    const { showTripDetails } = this.state
 
     if (!showTripDetails) {
       this.props.handleJourneyClick(this.props.journeyNumber)

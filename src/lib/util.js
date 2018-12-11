@@ -5,3 +5,9 @@ export function pickerFunction(truthyCondition, truthOption, falseOption) {
     return falseOption
   }
 }
+
+export function convertLatLng(array) {
+  return array.map(coords => {
+    return {lat:coords[0], lng: coords[1]}
+  })
+}

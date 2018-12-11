@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Button as GrommetButton, Grommet } from 'grommet';
+import { Button as GrommetButton } from 'grommet';
 
 class SignUp extends Component {
   constructor() {

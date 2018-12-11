@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
 import { Polyline } from "react-google-maps";
+import {convertLatLng} from '../lib/util'
 
-// format of coords is [lat,lng]. need to convert to {lat:'',lng:''}
-const convertLatLng = array => {
-  return array.map(coords => {
-    return {lat:coords[0], lng: coords[1]}
-  })
-}
+// format of coords is [lat,lng]. need to convert to {lat:'',lng:''}. Import convertLatLng from lib/util folder.
 
 class TripMap extends Component {
 
-  // constructor(){
-  //   super()
-  //   this.state = {
-  //     journeys: [],
-  //     journeyNumber: null
-  //   }
-  // }
-
+  // Prevent map from re-rendering on every state change. Component will only update if the journeys change
   shouldComponentUpdate(nextProps, nextState){
     if (this.props.journeys[0] === nextProps.journeys[0]){
       return false
@@ -33,14 +22,6 @@ class TripMap extends Component {
      journeys,
      journeySelected
    } = this.props
-
-
-   // const {
-   //   journeys,
-   //   journeyNumber
-   // } = this.state
-
-   // let displayJourneyArray = journeys[journeyNumber].legs
 
    const GoogleTripMap = withScriptjs(withGoogleMap(props => (
     <GoogleMap

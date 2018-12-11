@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import '../App.css';
-import FavTrips from './FavTrips';
 import axios from 'axios';
-import train from '../components/train.svg'
+import train from '../train.svg'
 
 class NavBar extends Component {
 
@@ -14,7 +13,7 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    // check if there is entry in localStorage.
+    // check localStorage
     if ( 'localStorage' in window ){
       // set all axios requests to have an Authorization header of Bearer <token>
       axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem('token')}`;
@@ -23,7 +22,7 @@ class NavBar extends Component {
 
   handleLogOut() {
     if ( 'localStorage' in window ) {
-      // on logout, delete the JWT token stored in local storage
+      // On logout, delete the JWT token stored in local storage
       window.localStorage.removeItem('token');
       window.location.reload();
     } else {
@@ -35,7 +34,14 @@ class NavBar extends Component {
     return(
       <div className="navContainer">
         <div className="nav searchNav">
-          <Link to="/search"><img className="trainImage" src={train}></img> Search Trip</Link>
+          <Link to="/search">
+            <img
+            className="trainImage"
+            src={train}
+            alt='Train Logo'
+            />
+            Search Trip
+          </Link>
         </div>
         <div className="navBar">
           {window.localStorage.getItem('token') ?

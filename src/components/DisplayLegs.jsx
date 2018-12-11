@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
-import { Text, Button as GrommetButton, Grommet } from 'grommet';
-import { Up, Down } from "grommet-icons";
-const moment = require("moment");
-const momentDurationFormatSetup = require("moment-duration-format");
+import { Button as GrommetButton } from 'grommet';
 
 //  Format the stop times using Moment.js
 function StopsColumn(props) {
@@ -17,6 +14,7 @@ function StopsColumn(props) {
   )
 }
 
+// LegDetails is a stateless functional component
 // Display logic for the different type of travel types (dependent on Trip Planner API)
 // 1: Train
 // 4: Light Rail
@@ -97,10 +95,7 @@ class DisplayLegs extends Component {
   }
 
   render() {
-    const {
-      origin,
-      destination
-    } = this.props.leg
+    const { origin } = this.props.leg
 
     const {
       walkPath,

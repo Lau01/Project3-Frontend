@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import SearchResults from '../components/SearchResults'
 import axios from 'axios';
-import { FormField, TextInput, Button, Grommet } from 'grommet';
-import { Favorite } from "grommet-icons";
+import { FormField, TextInput, Button } from 'grommet';
 import TripMap from '../components/TripMap';
 import FavTrips from './FavTrips';
 import {pickerFunction} from '../lib/util';
-import { css } from 'react-emotion';
 import { PropagateLoader } from 'react-spinners';
 
 
@@ -108,7 +106,8 @@ class SearchBar extends Component {
     })
   }
 
-  // When a fav trip is clicked, submit a new request with clicked origin and destination of favTrip
+  // End callback to handle a fav trip click.
+  // When a fav trip is clicked, submit a new request with clicked origin and destination received from <DisplayFavs />
   handleFavClick(event, origin, destination) {
     this.handleSubmit(event, origin, destination)
   }
@@ -169,7 +168,6 @@ class SearchBar extends Component {
 
     return(
       <div className="searchBarContainer">
-        {/* <h3>Plan your trip</h3> */}
         <form onSubmit={this.handleSubmit}>
           <div className="toFromContainer">
             <FormField label="From:">

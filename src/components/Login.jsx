@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import { Button as GrommetButton, Grommet } from 'grommet';
+import { Button as GrommetButton } from 'grommet';
 import axios from 'axios';
 
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      username: '',
       email: '',
       password: ''
     }
@@ -15,6 +14,7 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // On change event for storing state of email / password fields
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
   }
@@ -22,13 +22,14 @@ class Login extends Component {
   handleSubmit(event) {
     // axios.post('http://localhost:3000/user/login', {
     axios.post('https://plan-trip.herokuapp.com/user/login', {
-      username: this.state.username,
       email: this.state.email,
       password: this.state.password,
     })
     .then(res => {
+      // set axios headers from now on to have the Bearer <token> field
       axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
 
+      // store and set the JWT token in local storage
       if( 'localStorage' in window ){
         localStorage.setItem('token', res.data.token);
         this.props.history.push(`/search`);
@@ -46,17 +47,6 @@ class Login extends Component {
       <div className="loginContainer">
         <h2>Login Page</h2>
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <label className="labelLogin">Username:</label>
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleChange}
-            >
-            </input>
-          </div>
-
           <div>
             <label className="labelLogin">Email:</label>
             <input
@@ -83,8 +73,6 @@ class Login extends Component {
             type="submit"
             margin={{"left":"150px"}}
           />
-
-
         </form>
       </div>
     )

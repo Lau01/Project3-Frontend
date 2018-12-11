@@ -3,20 +3,21 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 import DisplayLegs from '../components/DisplayLegs'
 import '../App.css';
-import {pickerFunction} from '../lib/util'
-import { Text, Button as GrommetButton, Grommet } from 'grommet';
+import { Button as GrommetButton } from 'grommet';
 import { Up, Down } from "grommet-icons";
 const moment = require("moment");
-const momentDurationFormatSetup = require("moment-duration-format");
 
 
 // Format the time to minutes or hr/mins using moment.js
 function TotalDuration(props) {
   let totalDuration = 0;
-    props.legs.map(leg =>
+
+  // Sum the duration of each leg to get total duration and divide by 60 to get in minutes
+  props.legs.map(leg =>
     totalDuration += parseInt(leg.duration)/60
   )
 
+  // if total duration is greater than or equal 1 hour display logic changes
   if (totalDuration > 59) {
     return moment.duration(totalDuration, "minutes").format("h [hrs], m [min]");
   } else {

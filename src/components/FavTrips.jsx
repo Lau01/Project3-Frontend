@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import DisplayFavs from '../components/DisplayFavs'
 import axios from 'axios';
-import {pickerFunction} from '../lib/util';
-import { Text, Button as GrommetButton, Grommet } from 'grommet';
-import { css } from 'react-emotion';
+import { Text } from 'grommet';
 import { PropagateLoader } from 'react-spinners';
 
 class FavTrips extends Component {
@@ -21,11 +19,14 @@ class FavTrips extends Component {
     this.getRequest = this.getRequest.bind(this);
   }
 
+  // Get the logged in user's favorite trips by making an axios request to back end and identifying with their auth token.
   getRequest() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem('token')}`
     this.setState( {loading: true}, () => {
       axios.get(`https://plan-trip.herokuapp.com/user/favtrips`)
       .then(res => {
+        // Setting state to the returned data of the users fav Trips
+        // Also have to set state of loading for display logic of loading animation
         this.setState({
           loading: false,
           favTrips: res.data
@@ -40,9 +41,9 @@ class FavTrips extends Component {
     })
   } //getRequest
 
+  // When component mounts, run the getRequest function
   componentDidMount() {
     this.getRequest();
-    // setInterval(() => this.getRequest(), 1000)
   }
 
   // Get new list of fav trips for user when a trip is deleted
@@ -50,7 +51,8 @@ class FavTrips extends Component {
     this.getRequest()
   }
 
-  // Callback to handle when fav trip is clicked
+  // Callback to send origin/destination up to parent.
+  // Will run the SearchBar props handleFavClick in the parent component (<SearchBar />).
   handleFavClick = (event, origin, destination) => {
     this.props.handleFavClick(event, origin, destination)
   }

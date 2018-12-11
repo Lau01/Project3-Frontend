@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import DisplaySearch from '../components/DisplaySearch';
-import AddTrip from '../components/AddTrip';
-import TripMap from '../components/TripMap';
-import { Text, Button as GrommetButton, Grommet } from 'grommet';
+import { Text, Button as GrommetButton } from 'grommet';
 import { Add } from "grommet-icons";
 import {pickerFunction} from '../lib/util';
 // import addButtonTheme from '../custom-grommet-themes/themes';
@@ -60,18 +58,13 @@ class SearchResults extends Component {
     this.props.handleJourneyClick(journeyNumber, showTripDetails)
   }
 
-
   render () {
     const originShort = this.props.bestOrigin.disassembledName;
     const originFull = this.props.bestOrigin.name;
     const destShort = this.props.bestDestination.disassembledName;
     const destFull = this.props.bestDestination.name;
 
-    const {
-      journeys,
-      bestOrigin,
-      bestDestination,
-    } = this.props
+    const { journeys } = this.props
 
     // Helper function to use short name if available
     let originName = pickerFunction(originShort, originShort, originFull);

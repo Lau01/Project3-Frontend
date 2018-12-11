@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
-import { Text, Button as GrommetButton, Grommet } from 'grommet';
+import { Button as GrommetButton } from 'grommet';
 import { Trash } from "grommet-icons";
 
 
@@ -51,7 +51,8 @@ class DisplayFavs extends Component {
 
   }
 
-  // when clicking a fav trip, run the handleFavClick prop function which will make an axios req to fund the trip details
+  // Beginning callback funtion to send origin/destination to the highest component (<SearchBar />)
+  // When clicking a fav trip, run the handleFavClick prop function which will run the callback in the parent component (<FavTrips />).
   handleFavClick (event) {
     this.props.handleFavClick(event, this.state.origin, this.state.destination);
   }

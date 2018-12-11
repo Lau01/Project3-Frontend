@@ -20,6 +20,7 @@ class SearchBar extends Component {
       bestDestination: {},
       loading: false,
       displayFavs: false,
+      error: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -86,14 +87,18 @@ class SearchBar extends Component {
       }))
       .then((res) => {
         this.setState({
+          error: false,
           loading: false,
           journeys: res.data.journeys
         })
       })
       .catch(err => {
         console.warn(err);
-      }) // end of axios promises
-    }) // setState
+        this.setState({
+          error: 'Oops. Something went wrong. Please search again.'
+        });
+      }); // end of axios promises
+    }); // setState
 
     // this.props.history.push(`/search/${origin}/${destination}`)
     event.preventDefault();
@@ -106,7 +111,7 @@ class SearchBar extends Component {
     })
   }
 
-  // End callback to handle a fav trip click.
+  // End of callbacks to handle a fav trip click.
   // When a fav trip is clicked, submit a new request with clicked origin and destination received from <DisplayFavs />
   handleFavClick(event, origin, destination) {
     this.handleSubmit(event, origin, destination)
@@ -127,7 +132,8 @@ class SearchBar extends Component {
       bestOrigin,
       bestDestination,
       loading,
-      displayFavs
+      displayFavs,
+      error
     } = this.state
 
     // Display logic for fav button
@@ -145,12 +151,18 @@ class SearchBar extends Component {
       null
     )
 
-    // Loading div during axios req, otherwise searchResults variable (which is SearchResults component when journeys.length !== 0). Using react-spinners
-    let searchResultDiv = pickerFunction(
-      loading,
+    let errorMessage = pickerFunction(
+      error,
+      <div className="stopsError">{this.state.error}</div>,
       <div className="loading">
         <PropagateLoader color={'#7D4CDB'}/>
-      </div>,
+      </div>
+    )
+
+    // Loading Animation during axios req, otherwise searchResults variable (which is SearchResults component when journeys.length !== 0). Using react-spinners
+    let searchResultDiv = pickerFunction(
+      loading,
+      errorMessage,
       searchResults
     );
 

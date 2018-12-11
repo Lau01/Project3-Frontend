@@ -95,6 +95,12 @@ a:visited {
   float: right;
 }
 
+.stopsError {
+  position: absolute;
+  width: 580px;
+  margin-top: 50px;
+}
+
 /*
   ================= SearchResults.jsx
                                 */

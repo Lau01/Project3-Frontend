@@ -52,8 +52,8 @@ class SearchBar extends Component {
       // return axios.get(`http://localhost:3000/stop/${destination}`)
       return axios.get(`https://plan-trip.herokuapp.com/stop/${destination}`)
     }
-    // setState loading:true with callback as axios request
-    this.setState( {loading: true}, () => {
+    // setState loading:true and error: false with callback as axios request
+    this.setState( {loading: true, error: false}, () => {
       // make both requests for origin and destination to stop finder API
       axios.all([originRequest(), destinationRequest()])
       .then(axios.spread((originRes, destinationRes) => {
